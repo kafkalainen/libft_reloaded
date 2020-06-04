@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/04 10:48:48 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/04 14:37:19 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/04 09:24:41 by jnivala           #+#    #+#             */
+/*   Updated: 2020/06/04 17:14:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
-#include <string.h>
+#include "./libft.h"
+#include <stdlib.h>
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*ft_strdup(char *src)
 {
-	size_t	i;
+	int		i;
+	char	*str;
 
 	i = 0;
-	while ((s1[i] != '\0' || s2[i] != '\0') && i <= n)
+	str = (char*)malloc(sizeof(*str) * (ft_strlen(src) + 1));
+	if (str != NULL)
 	{
-		if (s1[i] > s2[i] || s1[i] < s2[i])
-			return ((char)(s1[i]) - (char)(s2[i]));
-		i++;
+		while (src[i] != '\0')
+		{
+			str[i] = src[i];
+			i++;
+		}
 	}
-	return (0);
+	str[i] = '\0';
+	return (str);
 }

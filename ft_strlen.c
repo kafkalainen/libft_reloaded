@@ -6,18 +6,19 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 09:12:10 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/04 14:37:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/04 17:14:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "./libft.h"
+#include <string.h>
 
-int		ft_strlen(char *str)
+size_t	ft_strlen(const char *s)
 {
-	int		i;
+	size_t		len;
 
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
 }

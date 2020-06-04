@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/04 15:26:56 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/04 09:53:33 by jnivala           #+#    #+#             */
+/*   Updated: 2020/06/04 17:14:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-# include <string.h>
+#include "./libft.h"
 
-int			ft_strlen(char *str);
+int		ft_strcmp(const char *s1, const char *s2)
+{
+	unsigned int	i;
 
-char		*ft_strdup(char *src);
-
-int			ft_strcmp(const char *s1, const char *s2);
-
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-
-char		*ft_strcpy(char *dest, const char *src);
-
-int			ft_atoi(char *str);
-#endif
+	i = 0;
+	while (s1[i] != '\0' || s2[i] != '\0')
+	{
+		if (s1[i] > s2[i] || s1[i] < s2[i])
+			return ((char)(s1[i]) - (char)(s2[i]));
+		i++;
+	}
+	return (0);
+}

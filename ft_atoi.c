@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 13:47:24 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/04 15:12:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/04 17:12:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "./libft.h"
 
 int		ft_atoi(char *str)
 {
