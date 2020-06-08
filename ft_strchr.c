@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 12:47:22 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/08 08:51:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/08 09:19:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,4 @@ char		*ft_strchr(const char *s, int c)
 		return (char*)(s + i);
 	else
 		return (NULL);
-
 }
