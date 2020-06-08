@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/08 11:30:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/08 15:52:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 # include <string.h>
 
 int			ft_atoi(char *str);
+
+int			ft_isalpha(int c);
+
+int			ft_isalnum(int c);
+
+int			ft_isdigit(int c);
 
 size_t		ft_strlen(const char *s);
 
