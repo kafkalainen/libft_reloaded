@@ -1,33 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/08 11:16:09 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/09 14:46:45 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/09 14:15:29 by jnivala           #+#    #+#             */
+/*   Updated: 2020/06/09 15:45:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
 #include <string.h>
+#include <stdlib.h>
 
-char		*ft_strnstr(const char *big, const char *little, size_t len)
+void		*ft_memmove(void *dest, const void *src, size_t n)
 {
 	size_t		i;
-	size_t		little_len;
+	size_t		j;
+	const char	*s;
+	char		*d;
+	char		*temp;
 
 	i = 0;
-	little_len = ft_strlen(little);
-	while (big[i] != '\0' && i < len)
+	j = 0;
+	s = src;
+	d = dest;
+	temp = (char*)malloc(sizeof(*temp) * (n));
+	if (temp != NULL)
 	{
-		if (big[i] == little[0])
+		while (i < n)
 		{
-			if (ft_strncmp((char*)(big + i), little, little_len) == 0)
-				return (char*)(big + i);
+			temp[i] = s[i];
+			i++;
 		}
-		i++;
+		while (j < n)
+		{
+			d[j] = temp[j];
+			j++;
+		}
+		free(temp);
+		return (dest);
 	}
-	return (NULL);
+	else
+		return (NULL);
 }

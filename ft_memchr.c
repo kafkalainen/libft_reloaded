@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/08 16:06:56 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/09 14:44:07 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/09 13:58:46 by jnivala           #+#    #+#             */
+/*   Updated: 2020/06/09 14:05:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "./libft.h"
 
-int		ft_isascii(int c)
+void		*ft_memchr(const void *s, int c, size_t n)
 {
-	if (c <= 127 && c >= 0)
-		return (1);
+	size_t			i;
+	const char		*temp;
+
+	i = 0;
+	temp = s;
+	while (i < n && temp[i] != c)
+		i++;
+	if (temp[i] == c)
+		return (void*)(s + i);
 	else
-		return (0);
+		return (NULL);
 }

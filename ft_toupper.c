@@ -6,15 +6,15 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 08:19:15 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/09 08:33:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/09 14:41:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./libft.h"
 
 int		ft_toupper(int c)
 {
-	if(c >= 97 && c <= 122)
+	if (c >= 97 && c <= 122)
 		return (c - 32);
 	else
 		return (c);

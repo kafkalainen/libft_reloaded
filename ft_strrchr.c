@@ -6,10 +6,9 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 08:46:48 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/08 09:07:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/09 14:42:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "./libft.h"
 #include <string.h>
