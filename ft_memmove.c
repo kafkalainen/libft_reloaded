@@ -6,38 +6,23 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 14:15:29 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/09 15:45:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/11 11:56:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./libft.h"
 #include <string.h>
 #include <stdlib.h>
 
 void		*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t		i;
-	size_t		j;
-	const char	*s;
-	char		*d;
-	char		*temp;
+	void		*temp;
 
-	i = 0;
-	j = 0;
-	s = src;
-	d = dest;
-	temp = (char*)malloc(sizeof(*temp) * (n));
+	temp = (void*)malloc(sizeof(*temp) * (n));
 	if (temp != NULL)
 	{
-		while (i < n)
-		{
-			temp[i] = s[i];
-			i++;
-		}
-		while (j < n)
-		{
-			d[j] = temp[j];
-			j++;
-		}
+		ft_memcpy(temp, src, n);
+		ft_memcpy(dest, temp, n);
 		free(temp);
 		return (dest);
 	}

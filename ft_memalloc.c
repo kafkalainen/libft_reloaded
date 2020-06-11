@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/08 11:16:09 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/11 11:04:41 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/11 11:35:01 by jnivala           #+#    #+#             */
+/*   Updated: 2020/06/11 12:02:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
-#include <string.h>
+#include <stdlib.h>
 
-char		*ft_strnstr(const char *big, const char *little, size_t len)
+void	*ft_memalloc(size_t size)
 {
-	size_t		i;
-	size_t		little_len;
+	void *mem;
 
-	i = 0;
-	if (ft_strcmp(little, "") == 0)
-		return ((char*)big);
-	little_len = ft_strlen(little);
-	while (big[i] != '\0' && i < len)
+	mem = (void*)malloc(sizeof(*mem) * size);
+	if (mem != NULL)
 	{
-		if (big[i] == little[0])
-		{
-			if (ft_strncmp((char*)(big + i), little, little_len) == 0)
-				return (char*)(big + i);
-		}
-		i++;
+		ft_bzero(mem, size);
+		return (mem);
 	}
-	return (NULL);
+	else
+		return (NULL);
 }
