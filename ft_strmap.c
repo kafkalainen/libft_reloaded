@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/10 09:28:23 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 14:58:22 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/12 10:46:20 by jnivala           #+#    #+#             */
+/*   Updated: 2020/06/12 11:36:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include "./libft.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+char		*ft_strmap(char const *s, char (*f)(char))
 {
-	size_t			i;
-	const char		*str1;
-	const char		*str2;
+	unsigned int	i;
+	char			*new_str;
 
 	i = 0;
-	str1 = s1;
-	str2 = s2;
-	while (i < n)
+	new_str = (char*)malloc(sizeof(*new_str) * (ft_strlen(s) + 1));
+	if (new_str != NULL)
 	{
-		if ((unsigned char)str1[i] > (unsigned char)str2[i] ||
-			(unsigned char)str1[i] < (unsigned char)str2[i])
+		while (s[i] != '\0')
 		{
-			return ((int)str1[i] - (int)str2[i]);
+			new_str[i] = f(s[i]);
+			i++;
 		}
-		i++;
+		new_str[i] = '\0';
+		return (new_str);
 	}
-	return (0);
+	else
+		return (NULL);
 }

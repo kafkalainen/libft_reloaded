@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/10 09:28:23 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 14:58:22 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/11 15:43:15 by jnivala           #+#    #+#             */
+/*   Updated: 2020/06/12 10:28:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stdlib.h>
 #include "./libft.h"
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+void		ft_strdel(char **as)
 {
-	size_t			i;
-	const char		*str1;
-	const char		*str2;
+	size_t		i;
 
 	i = 0;
-	str1 = s1;
-	str2 = s2;
-	while (i < n)
+	while (as[i] != 0)
 	{
-		if ((unsigned char)str1[i] > (unsigned char)str2[i] ||
-			(unsigned char)str1[i] < (unsigned char)str2[i])
-		{
-			return ((int)str1[i] - (int)str2[i]);
-		}
+		free(as[i]);
+		as[i] = NULL;
 		i++;
 	}
-	return (0);
+	free(as);
+	as = NULL;
 }

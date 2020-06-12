@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/10 09:28:23 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 14:58:22 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/12 13:20:24 by jnivala           #+#    #+#             */
+/*   Updated: 2020/06/12 13:22:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
-#include "./libft.h"
+#include "libft.h"
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+int		ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	size_t			i;
-	const char		*str1;
-	const char		*str2;
-
-	i = 0;
-	str1 = s1;
-	str2 = s2;
-	while (i < n)
-	{
-		if ((unsigned char)str1[i] > (unsigned char)str2[i] ||
-			(unsigned char)str1[i] < (unsigned char)str2[i])
-		{
-			return ((int)str1[i] - (int)str2[i]);
-		}
-		i++;
-	}
-	return (0);
+	if (ft_strncmp(s1, s2, n) == 0)
+		return (1);
+	else
+		return (0);
 }

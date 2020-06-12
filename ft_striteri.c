@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/10 09:28:23 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 14:58:22 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/12 10:31:46 by jnivala           #+#    #+#             */
+/*   Updated: 2020/06/12 10:42:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include "./libft.h"
-
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+void		ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	size_t			i;
-	const char		*str1;
-	const char		*str2;
+	unsigned int	i;
 
 	i = 0;
-	str1 = s1;
-	str2 = s2;
-	while (i < n)
+	while (s[i] != '\0')
 	{
-		if ((unsigned char)str1[i] > (unsigned char)str2[i] ||
-			(unsigned char)str1[i] < (unsigned char)str2[i])
-		{
-			return ((int)str1[i] - (int)str2[i]);
-		}
+		f(i, &s[i]);
 		i++;
 	}
-	return (0);
 }
