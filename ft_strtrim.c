@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 15:01:24 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 15:34:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/12 22:50:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,18 @@
 
 char		*ft_strtrim(char const *s)
 {
-	char		*trimmed_str;
-	size_t		nb_of_whitespaces;
-	size_t		i;
+	char				*trimmed_str;
+	unsigned int		i;
+	size_t				len;
 
-	nb_of_whitespaces = 0;
 	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
-			nb_of_whitespaces++;
+	len = ft_strlen(s);
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
 		i++;
-	}
-	trimmed_str = (char*)malloc(sizeof(*trimmed_str) * (ft_strlen(s) - nb_of_whitespaces + 1);
-	i = 0;
+	while (s[len - 1] == ' ' || s[len - 1] == '\n' || s[len - 1] == '\t')
+		len--;
+	trimmed_str = (char*)malloc(sizeof(*trimmed_str) * (len - i + 1));
 	if (trimmed_str != NULL)
-	{
-		while (s[i] != '\0')
-		{
-			if (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
-				i++;
-			else
-			{
-				trimmed_str[i] = s[i];
-				i++;
-			}
-		}
-		trimmed_str[i] = '\0'
-	}
+		trimmed_str = ft_strsub(s, i, len - i);
 	return (trimmed_str);
 }

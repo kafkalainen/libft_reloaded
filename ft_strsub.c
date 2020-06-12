@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 13:37:32 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 14:07:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/12 22:42:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,3 @@ char		*ft_strsub(char const *s, unsigned int start, size_t len)
 	}
 	return (sub_string);
 }
-
-//s[start + i] != '\0'
