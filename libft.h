@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/15 11:08:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/15 17:01:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int			ft_isascii(int c);
 int			ft_isdigit(int c);
 
 int			ft_isprint(int c);
+
+char		*ft_itoa(int n);
 
 void		*ft_memalloc(size_t size);
 

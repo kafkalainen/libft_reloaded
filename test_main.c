@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:42:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/15 12:46:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/15 18:23:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -833,6 +833,18 @@ void	ft_strsplit_tester(char *s1, char *s2)
 	ft_putendl_fd(ft_strjoin(s1, s2), 1);
 }
 
+void	ft_itoa_tester()
+{
+	yellow();
+	printf("Test ft_itoa: Testing it by giving it few integrals and printf:ing those.\n");
+	printf("\033[0m");
+	printf(":\n");
+	ft_putendl_fd("test with '12345' and '-12345'.", 1);
+	ft_string_function_tester(ft_itoa(12345), "12345");
+	ft_string_function_tester(ft_itoa(-12345), "-12345");
+	printf("<\n");
+}
+
 int		main(int argc, char **argv)
 {
 	size_t	str_len;
@@ -1061,6 +1073,7 @@ int		main(int argc, char **argv)
 		ft_strjoin_tester(argv[1], argv[2]);
 		ft_strtrim_tester(argv[1], argv[2]);
 		ft_strsplit_tester(argv[1], argv[2]);
+		ft_itoa_tester();
 	}
 	return (0);
 }
