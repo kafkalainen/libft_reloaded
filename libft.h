@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 15:01:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/15 11:08:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ char		*ft_strnew(size_t size);
 char		*ft_strstr(const char *haystack, const char *needle);
 
 char		*ft_strnstr(const char *big, const char *little, size_t len);
+
+char		**ft_strsplit(char const *s, char c);
 
 char		*ft_strsub(char const *s, unsigned int start, size_t len);
 

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:42:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 22:05:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/15 12:46:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -814,7 +814,23 @@ void	ft_strtrim_tester(char *s1, char *s2)
 	printf("<\n");
 	ft_putendl_fd("test with parameters.", 1);
 	ft_putendl_fd(ft_strjoin(s1, s2), 1);
+}
 
+void	ft_strsplit_tester(char *s1, char *s2)
+{
+	yellow();
+	printf("Test ft_strsplit: Testing it by giving it few string literals and comparing those.\n");
+	printf("\033[0m");
+	printf(":\n");
+	ft_putendl_fd("test with '    Hello     ' and '     Hel    lo     '.", 1);
+	ft_string_function_tester(ft_strsplit("    Hello     ", ' ')[0], "Hello");
+	ft_string_function_tester(ft_strsplit("     Hel    lo     ", ' ')[1], "lo");
+	ft_string_function_tester(ft_strsplit("     Marvin    rules     ", ' ')[1], "rules");
+	ft_string_function_tester(ft_strsplit("     Coffee  breaks are for weak.", ' ')[1], "breaks");
+	ft_string_function_tester(ft_strsplit("%%%%%%Galaxy is%%%%for%%%%all.", '%')[0], "Galaxy is");
+	printf("<\n");
+	ft_putendl_fd("test with parameters.", 1);
+	ft_putendl_fd(ft_strjoin(s1, s2), 1);
 }
 
 int		main(int argc, char **argv)
@@ -1044,6 +1060,7 @@ int		main(int argc, char **argv)
 		ft_strsub_tester();
 		ft_strjoin_tester(argv[1], argv[2]);
 		ft_strtrim_tester(argv[1], argv[2]);
+		ft_strsplit_tester(argv[1], argv[2]);
 	}
 	return (0);
 }
