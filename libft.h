@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/15 17:01:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:08:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,15 @@ void		ft_memdel(void **ap);
 
 void		*ft_memmove(void *dest, const void *src, size_t n);
 
+void		ft_putchar(char c);
+
 void		ft_putchar_fd(char c, int fd);
 
+void		ft_putendl(char const *s);
+
 void		ft_putendl_fd(char const *s, int fd);
+
+void		ft_putstr(char const *s);
 
 void		ft_putstr_fd(char const *s, int fd);
 

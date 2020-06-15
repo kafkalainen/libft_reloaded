@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:42:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/15 18:23:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:11:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -644,7 +644,7 @@ void	ft_strnew_tester(size_t n)
 	}
 }
 
-void	ft_putstr(char *s)
+void	ft_puts(char *s)
 {
 	write(1, s, strlen(s));
 }
@@ -655,11 +655,11 @@ void	ft_striter_tester(char *s1, char *s2)
 	printf("Test ft_striter: Testing that str_iter iterates a function.\n");
 	printf("\033[0m");
 	printf("a\n");
-	ft_striter(s1, ft_putstr);
+	ft_striter(s1, ft_puts);
 	ft_putchar_fd('\n', 1);
-	ft_striter(s2, ft_putstr);
+	ft_striter(s2, ft_puts);
 	ft_putchar_fd('\n', 1);
-	ft_striter("Hello", ft_putstr);
+	ft_striter("Hello", ft_puts);
 	ft_putchar_fd('\n', 1);
 }
 
@@ -843,6 +843,29 @@ void	ft_itoa_tester()
 	ft_string_function_tester(ft_itoa(12345), "12345");
 	ft_string_function_tester(ft_itoa(-12345), "-12345");
 	printf("<\n");
+}
+
+void	ft_putcha_test2(char *s1, char *s2)
+{
+	yellow();
+	printf("Test ft_putchar_fd: Testing that ft_putchar puts out a character.\n");
+	printf("\033[0m");
+	printf("a\n");
+	ft_putchar(s1[0]);
+	ft_putchar(s2[0]);
+	yellow();
+	printf("Test ft_putstr_fd: Testing that ft_putstr puts out a string.\n");
+	printf("\033[0m");
+	printf("a\n");
+	ft_putstr(s1);
+	ft_putstr(s2);
+	ft_putchar('\n');
+	yellow();
+	printf("Test ft_putendl_fd: Testing that ft_putendl puts out a string with nl to 2 fd.\n");
+	printf("\033[0m");
+	printf("a\n");
+	ft_putendl(s1);
+	ft_putendl(s2);
 }
 
 int		main(int argc, char **argv)
@@ -1074,6 +1097,7 @@ int		main(int argc, char **argv)
 		ft_strtrim_tester(argv[1], argv[2]);
 		ft_strsplit_tester(argv[1], argv[2]);
 		ft_itoa_tester();
+		ft_putcha_test2(argv[1], argv[2]);
 	}
 	return (0);
 }

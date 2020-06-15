@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/26 23:33:46 by jnivala           #+#    #+#              #
-#    Updated: 2020/06/15 18:18:58 by jnivala          ###   ########.fr        #
+#    Updated: 2020/06/15 19:13:05 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC = ./ft_strlen.c ./ft_strdup.c ./ft_strcmp.c \
 ./ft_memalloc.c ./ft_memdel.c ./ft_strnew.c ./ft_strdel.c ./ft_strclr.c \
 ./ft_putchar_fd.c ./ft_putstr_fd.c ./ft_putendl_fd.c ./ft_striter.c \
 ./ft_striteri.c ./ft_strmap.c ./ft_strmapi.c ./ft_strequ.c ./ft_strnequ.c \
-./ft_strsub.c ./ft_strtrim.c ./ft_strjoin.c ./ft_strsplit.c ./ft_itoa.c
+./ft_strsub.c ./ft_strtrim.c ./ft_strjoin.c ./ft_strsplit.c ./ft_itoa.c \
+./ft_putchar.c ./ft_putstr.c ./ft_putendl.c
 
 INC = ./libft.h
 
@@ -34,7 +35,8 @@ ft_strcpy.o ft_strncpy.o ft_strcat.o ./ft_strncat.o ./ft_strlcat.o \
 ./ft_strnew.o ./ft_strdel.o ./ft_strclr.o ./ft_putchar_fd.o ./ft_putstr_fd.o \
 ./ft_striter.o ./ft_putendl_fd.o ./ft_striteri.o ./ft_strmap.o ./ft_strmapi.o \
 ./ft_strequ.o ./ft_strnequ.o ./ft_strsub.o ./ft_strjoin.o ./ft_strtrim.o \
-./ft_strsplit.o ./ft_itoa.o ./libft.h.gch
+./ft_strsplit.o ./ft_itoa.o ./ft_putchar.o ./ft_putstr.o ./ft_putendl.o \
+./libft.h.gch
 
 all: $(NAME)
 
