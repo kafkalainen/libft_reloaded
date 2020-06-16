@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/15 19:08:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/16 09:02:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putendl(char const *s);
 
 void		ft_putendl_fd(char const *s, int fd);
+
+void		ft_putnbr(int n);
+
+void		ft_putnbr_fd(int n, int fd);
 
 void		ft_putstr(char const *s);
 

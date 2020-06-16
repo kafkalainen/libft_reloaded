@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 15:43:15 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 10:28:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/16 08:23:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,9 @@
 
 void		ft_strdel(char **as)
 {
-	size_t		i;
-
-	i = 0;
-	while (as[i] != 0)
+	if (*as != NULL)
 	{
-		free(as[i]);
-		as[i] = NULL;
-		i++;
+		free(*as);
+		*as = NULL;
 	}
-	free(as);
-	as = NULL;
 }

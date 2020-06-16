@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:42:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/15 19:11:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/16 09:05:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ void ft_cmp_function_tester(int own, int system)
 void ft_memchr_tester(void *s, int c, size_t n)
 {
 	printf("ft_memchr: searches mem for char c and returns a pointer to where first instance is found.\n");
-	//ft_memory_function_tester(ft_memchr(s, c, n), memchr(s, n, n));
 	ft_string_function_tester((char*)ft_memchr(s, c, n), (char*)memchr(s, c, n));
 }
 
@@ -868,6 +867,38 @@ void	ft_putcha_test2(char *s1, char *s2)
 	ft_putendl(s2);
 }
 
+void	ft_putnbr_test()
+{
+	yellow();
+	printf("Test ft_putnbr: Testing that ft_putnbr puts out a integer.\n");
+	printf("\033[0m");
+	printf("Test with max integers\n");
+	ft_putnbr(-2147483648);
+	ft_putchar('\n');
+	ft_putnbr(2147483647);
+	ft_putchar('\n');
+	ft_putnbr(42);
+	ft_putchar('\n');
+	ft_putnbr(-42);
+	ft_putchar('\n');
+}
+
+void	ft_putnbr_fd_test()
+{
+	yellow();
+	printf("Test ft_putnbr_fd: Testing that ft_putnbr_fd puts out a integer in correct file descriptor.\n");
+	printf("\033[0m");
+	printf("Test with max integers\n");
+	ft_putnbr_fd(-2147483648, 2);
+	ft_putchar('\n');
+	ft_putnbr_fd(2147483647, 2);
+	ft_putchar('\n');
+	ft_putnbr_fd(42, 2);
+	ft_putchar('\n');
+	ft_putnbr_fd(-42, 2);
+	ft_putchar('\n');
+}
+
 int		main(int argc, char **argv)
 {
 	size_t	str_len;
@@ -1098,6 +1129,8 @@ int		main(int argc, char **argv)
 		ft_strsplit_tester(argv[1], argv[2]);
 		ft_itoa_tester();
 		ft_putcha_test2(argv[1], argv[2]);
+		ft_putnbr_test();
+		ft_putnbr_fd_test();
 	}
 	return (0);
 }

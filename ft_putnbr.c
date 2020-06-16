@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/11 13:30:45 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/16 08:22:32 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/16 08:24:58 by jnivala           #+#    #+#             */
+/*   Updated: 2020/06/16 08:50:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
-#include <stdlib.h>
 
-void		ft_memdel(void **ap)
+void		ft_putnbr(int n)
 {
-	if (*ap != NULL)
+	if (n == -2147483648)
 	{
-		free(*ap);
-		*ap = NULL;
+		ft_putchar('-');
+		ft_putchar('2');
+		n = 147483648;
+	}	
+	if (n < 0)
+	{
+		ft_putchar('-');
+		n *= -1;
 	}
+	if (n / 10 > 0)
+		ft_putnbr(n / 10);
+	ft_putchar(n % 10 + '0');
 }
