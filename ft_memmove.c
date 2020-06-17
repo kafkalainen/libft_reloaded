@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 14:15:29 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/11 11:56:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/17 09:45:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
-#include <string.h>
 #include <stdlib.h>
 
 void		*ft_memmove(void *dest, const void *src, size_t n)

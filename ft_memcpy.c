@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 09:43:06 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/09 10:39:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/17 08:26:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
-#include <string.h>
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {

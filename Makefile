@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/26 23:33:46 by jnivala           #+#    #+#              #
-#    Updated: 2020/06/16 08:59:24 by jnivala          ###   ########.fr        #
+#    Updated: 2020/06/17 10:18:44 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,11 +46,11 @@ $(NAME):
 	@ranlib $(NAME)
 
 test:
-	@gcc -Wall -Werror -Wextra test_main.c -L. -lft -lbsd -o t
+	@gcc -Wall -Werror -Wextra -g test_main.c -L. -lft -lbsd -o t
 
 retest:
 	@rm -f test
-	@gcc -Wall -Werror -Wextra test_main.c -L. -lft -lbsd -o t
+	@gcc -Wall -Werror -Wextra -g test_main.c -L. -lft -lbsd -o t
 
 clean:
 	@rm -f $(OBJ)

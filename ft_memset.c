@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 08:40:25 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/09 14:48:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/16 10:39:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
-#include <string.h>
 
 void		*ft_memset(void *s, int c, size_t n)
 {
