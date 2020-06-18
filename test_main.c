@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:42:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/17 10:09:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/18 16:50:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,17 @@ void ft_cmp_function_tester(int own, int system)
 	}
 }
 
-void ft_memchr_tester(void *s, int c, size_t n)
+void ft_memchr_tester()
 {
+	char *test;
+
+	test = (char*)malloc(sizeof(*test) * 15);
+	strcpy(test, "Hello it's me.");
 	printf("ft_memchr: searches mem for char c and returns a pointer to where first instance is found.\n");
-	ft_string_function_tester((char*)ft_memchr(s, c, n), (char*)memchr(s, c, n));
+	ft_memory_function_tester(ft_memchr(test, 'r', 14), memchr(test, 'r', 14));
+	ft_memory_function_tester(ft_memchr(test, '.', 14), memchr(test, '.', 14));
+	ft_memory_function_tester(ft_memchr(test, 'o', 20), memchr(test, 'o', 20));
+	free(test);
 }
 
 void ft_memmove_tester()
@@ -163,6 +170,7 @@ void ft_memmove_tester()
 	char *str4;
 	char *test;
 
+	yellow();
 	printf("ft_memmove: moves a src to a temp and copies temp to dest and returns a pointer to dest.\n");
 	str = (char*)malloc(sizeof(*str) * 20);
 	str2 = (char*)malloc(sizeof(*str2) * 9);
@@ -187,23 +195,16 @@ void ft_memmove_tester()
 	free(test);
 }
 
-void	ft_memcmp_tester(char *s2, char *s1, size_t size)
+void	ft_memcmp_tester(char *s2, char *s1)
 {
-	char str1[15];
-	char str2[15];
-	char *str3;
-	char *str4;
-	char *str5;
-	char *str6;
-	char str7[15];
-	char str8[15];
+	char **str;
 	int tab1[100];
 	int tab2[100];
-	int ret1;
-	int ret2;
 	int i;
+	int j;
 
 	i = 0;
+	j = 0;
 	while (i < 100)
 	{
 		tab1[i] = i;
@@ -211,170 +212,148 @@ void	ft_memcmp_tester(char *s2, char *s1, size_t size)
 		i++;
 	}
 	tab2[41] = 42;
-	str3 = (char*)malloc(sizeof(*str3) * 100 + 1);
-	str4 = (char*)malloc(sizeof(*str4) * 100 + 1);
-	str5 = (char*)malloc(sizeof(*str5) * 100 + 1);
-	str6 = (char*)malloc(sizeof(*str6) * 100 + 1);
-	memcpy(str2, "abcdef", 6);
-	memcpy(str1, "ABCDEF", 6);
-	memcpy(str3, s1, size);
-	memcpy(str4, s2, size);
-	memcpy(str5, s1, size);
-	memcpy(str6, s2, size);
-	memcpy(str7, "abcdef", 6);
-	memcpy(str8, "ABC", 3);
+	str = (char**)malloc(sizeof(*str) * 5);
+	while (j < 4)
+	{
+		str[j] = (char*)malloc(sizeof(*str) * 15);
+		ft_strcpy(str[j], "Hello it's me.");
+		j++;
+	}
+	str[j] = '\0';
+	str[2][6] = 'a';
+	str[3][6] = 'z';
+	yellow();
+	printf("ft_memcmp: compares mem spaces until n byte.\n");
+	ft_default();
 	printf("Comparison of tab1 and tab2 with size 100:\n");
-	ret1 = ft_memcmp(tab2, tab1, sizeof(tab1));
-	ret2 = memcmp(tab2, tab1, sizeof(tab1));
-	ft_cmp_function_tester(ret1, ret2);
-	printf("Comparison of abcdef and ABCDEF with size 5:\n");
-	ret1 = ft_memcmp(str1, str2, 5);
-	ret2 = memcmp(str1, str2, 5);
-	ft_cmp_function_tester(ret1, ret2);
-	printf("Comparison of abcdef and ABCDEF with size 3:\n");
-	ret1 = ft_memcmp(str1, str2, 3);
-	ret2 = memcmp(str1, str2, 3);
-	ft_cmp_function_tester(ret1, ret2);
-	printf("Comparison of abcdef and ABCDEF with size 2:\n");
-	ret1 = ft_memcmp(str1, str2, 2);
-	ret2 = memcmp(str1, str2, 2);
-	ft_cmp_function_tester(ret1, ret2);
-	printf("Comparison of abcdef and ABCDEF with size 6:\n");
-	ret1 = ft_memcmp(str1, str2, 6);
-	ret2 = memcmp(str1, str2, 6);
-	ft_cmp_function_tester(ret1, ret2);
-	printf("Comparison of abcdef and ABCDEF with size 4:\n");
-	ret1 = ft_memcmp(str1, str2, 6);
-	ret2 = memcmp(str1, str2, 6);
-	ft_cmp_function_tester(ret1, ret2);
-	printf("Comparison of abcdef and ABC with size 4:\n");
-	ret1 = ft_memcmp(str1, str2, 4);
-	ret2 = memcmp(str1, str2, 4);
-	ft_cmp_function_tester(ret1, ret2);
-	printf("Comparison of full length:\n");
-	ret1 = ft_memcmp(str3, str4, size);
-	ret2 = memcmp(str3, str4, size);
-	ft_cmp_function_tester(ret1, ret2);
+	i = ft_memcmp(tab2, tab1, sizeof(tab1));
+	j = memcmp(tab2, tab1, sizeof(tab1));
+	ft_cmp_function_tester(i, j);
+	printf("Comparison of equal with size 15:\n");
+	i = ft_memcmp(str[0], str[1], 15);
+	j = memcmp(str[0], str[1], 15);
+	ft_cmp_function_tester(i, j);
+	printf("Comparison of bigger with size 15:\n");
+	i = ft_memcmp(str[0], str[2], 15);
+	j = memcmp(str[0], str[2], 15);
+	ft_cmp_function_tester(i, j);
+	printf("Comparison of smaller with size 15:\n");
+	i = ft_memcmp(str[0], str[3], 15);
+	j = memcmp(str[0], str[3], 15);
+	ft_cmp_function_tester(i, j);
+	printf("Comparison with size of 0:\n");
+	i = ft_memcmp(str[0], str[3], 0);
+	j = memcmp(str[0], str[3], 0);
+	ft_cmp_function_tester(i, j);
 	printf("Comparison, where size is way over what it should:\n");
-	ret1 = ft_memcmp(str5, str6, 1000);
-	ret2 = memcmp(str5, str6, 1000);
-	ft_int_function_tester(ret1, ret2);
+	i = ft_memcmp(str[0], str[3], 200);
+	j = memcmp(str[0], str[3], 200);
+	ft_cmp_function_tester(i, j);
+	if (ft_strlen(s1) > ft_strlen(s2))
+	{
+		i = ft_memcmp(s1, s2, ft_strlen(s2));
+		j = memcmp(s1, s2, ft_strlen(s2));
+		ft_cmp_function_tester(i, j);
+	}
+	else
+	{
+		i = ft_memcmp(s1, s2, ft_strlen(s1));
+		j = memcmp(s1, s2, ft_strlen(s1));
+		ft_cmp_function_tester(i, j);
+	}
+	free(str[0]);
+	str[0] = NULL;
+	free(str[1]);
+	str[1] = NULL;
+	free(str[2]);
+	str[2] = NULL;
+	free(str[3]);
+	str[3] = NULL;
+	free(str[4]);
+	str[4] = NULL;
+	free(str);
+	str = NULL;
 }
 
 void	ft_strcat_tester(char *s1, char *s2)
 {
 	char *str1;
 	char *str2;
-	char str3[50];
-	char str4[50];
-	char *str5;
-	char *str6;
-	char str7[10];
-	char str8[10];
-	//char str9[10];
-	//char str10[10];
+	char *str3;
+	char *str4;
+	char str5[11];
+	char str6[6];
+	char str7[11];
+	char str8[6];
 
-	str1 = (char*)malloc(sizeof(*str1) * (strlen(s1) + 1));
-	str2 = (char*)malloc(sizeof(*str2) * (strlen(s2) + 1));
-	str5 = (char*)malloc(sizeof(*str5) * (strlen(s1) + 1));
-	str6 = (char*)malloc(sizeof(*str6) * (strlen(s2) + 1));
+	str1 = (char*)malloc(sizeof(*str1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	str2 = (char*)malloc(sizeof(*str2) * (ft_strlen(s2) + 1));
+	str3 = (char*)malloc(sizeof(*str3) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	str4 = (char*)malloc(sizeof(*str4) * (ft_strlen(s2) + 1));
+	yellow();
 	printf("ft_strcat: Copied first string to end of an another string. Results were: \n");
+	ft_default();
 	printf("Testing catenation with parameters:\n");
 	strcpy(str1, s1);
 	strcpy(str2, s2);
 	strcpy(str3, s1);
 	strcpy(str4, s2);
-	strcpy(str5, s1);
-	strcpy(str6, s2);
-	ft_string_function_tester(ft_strcat(str1, str2), strcat(str1, str2));
-	ft_string_function_tester(ft_strcat(str3, str4), strcat(str3, str4));
-	ft_string_function_tester(ft_strcat(str5, str6), strcat(str5, str6));
+	ft_string_function_tester(ft_strcat(str1, str2), strcat(str3, str4));
 	printf("Testing catenation with fixed length parameters with enough space:\n");
+	strcpy(str5, "Hello");
+	strcpy(str6, "Hullo");
 	strcpy(str7, "Hello");
 	strcpy(str8, "Hullo");
-	ft_string_function_tester(ft_strcat(str7, str8), strcat(str7, str8));
+	ft_string_function_tester(ft_strcat(str5, str6), strcat(str7, str8));
 	/*printf("Testing catenation with no space in the end:\n");
 	strcpy(str9, "Thisistoo");
 	strcpy(str10, "longforyu");
 	ft_string_function_tester(ft_strcat(str9, str10), strcat(str9, str10));*/
 	free(str1);
 	free(str2);
-	free(str5);
-	free(str6);
+	free(str3);
+	free(str4);
 }
 
-void	ft_strncat_tester(char *s1, char *s2, size_t n)
+void	ft_strncat_tester(char *s1, char *s2)
 {
-	char *str1;
-	char *str2;
-	char *str11;
-	char *str12;
-	char str3[50];
-	char str4[50];
-	char str13[50];
-	char str14[50];
-	char *str5;
-	char *str6;
-	char *str15;
-	char *str16;
-	char str7[10];
-	char str8[10];
-	char str17[10];
-	char str18[10];
-	char str9[10];
-	char str10[10];
-	char str19[10];
-	char str20[10];
+	int		i;
+	char	**str;
 
-
-	str1 = (char*)malloc(sizeof(*str1) * (strlen(s1) + 1));
-	str2 = (char*)malloc(sizeof(*str2) * (strlen(s2) + 1));
-	str5 = (char*)malloc(sizeof(*str5) * (strlen(s1) + 1));
-	str6 = (char*)malloc(sizeof(*str6) * (strlen(s2) + 1));
-	str11 = (char*)malloc(sizeof(*str11) * (strlen(s1) + 1));
-	str12 = (char*)malloc(sizeof(*str12) * (strlen(s2) + 1));
-	str15 = (char*)malloc(sizeof(*str15) * (strlen(s1) + 1));
-	str16 = (char*)malloc(sizeof(*str16) * (strlen(s2) + 1));
-	printf("ft_strncat: Copied first three characters to end of an another string. Results were: \n");
+	i = 0;
+	str = (char**)malloc(sizeof(*str) * 5);
+	while (i < 2)
+	{
+		str[i] = (char*)malloc(sizeof(*str) * (strlen(s1) + strlen(s2) / 2 + 1));
+		i++;
+	}
+	while (i < 4)
+	{
+		str[i] = (char*)malloc(sizeof(*str) * (strlen(s2) + 1));
+		i++;
+	}
+	str[i] = '\0';
+	yellow();
+	printf("ft_strncat: Copied half of characters of par 2 to par 1. Results were: \n");
+	ft_default();
 	printf("Testing catenation with parameters:\n");
-	strcpy(str1, s1);
-	strcpy(str2, s2);
-	strcpy(str3, s1);
-	strcpy(str4, s2);
-	strcpy(str5, s1);
-	strcpy(str6, s2);
-	strcpy(str11, s1);
-	strcpy(str12, s2);
-	strcpy(str13, s1);
-	strcpy(str14, s2);
-	strcpy(str15, s1);
-	strcpy(str16, s2);
-	ft_string_function_tester(ft_strncat(str1, str2, n), strncat(str11, str12, n));
-	ft_string_function_tester(ft_strncat(str3, str4, n), strncat(str13, str14, n));
-	ft_string_function_tester(ft_strncat(str5, str6, n), strncat(str15, str16, n));
-	printf("Testing catenation with fixed length parameters with enough space:\n");
-	strcpy(str7, "Hello");
-	strcpy(str8, "Hullo");
-	strcpy(str17, "Hello");
-	strcpy(str18, "Hullo");
-	ft_string_function_tester(ft_strncat(str7, str8, 2), strncat(str17, str18, 2));
-	printf("Testing catenation with no space in the end:\n");
-	strcpy(str9, "Thisistoo");
-	strcpy(str10, "longforyu");
-	strcpy(str19, "Thisistoo");
-	strcpy(str20, "longforyu");
-	ft_string_function_tester(ft_strncat(str9, str10, 6), strncat(str19, str20, 6));
-	free(str1);
-	free(str2);
-	free(str5);
-	free(str6);
-	free(str11);
-	free(str12);
-	free(str15);
-	free(str16);
+	strcpy(str[0], s1);
+	strcpy(str[1], s1);
+	strcpy(str[2], s2);
+	strcpy(str[3], s2);
+	ft_string_function_tester(ft_strncat(str[0], str[2], strlen(s2) / 2), strncat(str[1], str[3], strlen(s2) / 2));
+	i = 0;
+	while (i < 5)
+	{
+		free(str[i]);
+		str[i] = NULL;
+		i++;
+	}
+	free(str);
+	str = NULL;
 }
 
-void	ft_strlcat_tester(char *s1, char *s2, size_t n)
+void	ft_strlcat_tester(char *s1, char *s2)
 {
 	char *str1;
 	char *str2;
@@ -397,7 +376,6 @@ void	ft_strlcat_tester(char *s1, char *s2, size_t n)
 	char str19[10];
 	char str20[10];
 
-	printf("%ld\n", n);
 	str1 = (char*)malloc(sizeof(*str1) * (strlen(s1) + 1));
 	str2 = (char*)malloc(sizeof(*str2) * (strlen(s2) + 1));
 	str5 = (char*)malloc(sizeof(*str5) * (strlen(s1) + 1));
@@ -457,27 +435,6 @@ void	ft_strlcat_tester(char *s1, char *s2, size_t n)
 	free(str12);
 	free(str15);
 	free(str16);
-}
-
-void	ft_strnstr_tester(char *big, char *little, size_t n)
-{
-	yellow();
-	printf("Test ft_strnstr: Testing that substring can be found.\n");
-	ft_default();
-	printf("Testing with a string with limited length, answer is behind\n");
-	ft_string_function_tester(ft_strnstr("Can't find me", "me", 11), strnstr("Can't find me", "me", 11));
-	printf("search using a first string of par with limited length of 5\n");
-	printf("both functions make a segfault if parameter is too short: aaanaa naa\n");
-	ft_string_function_tester(ft_strnstr(big, little, n), strnstr(big, little, n));
-	printf("search using a first string of par with empty string of limited length of 5\n");
-	ft_string_function_tester(ft_strnstr(big, "", n), strnstr(big, "", n));
-	printf("search using a first string of par with null string of limited length of 5\n");
-	printf("segfault tester: uncomment to test\n");
-	/*ft_string_function_tester(ft_strnstr(big, NULL, n), strnstr(big, NULL, n));*/
-	printf("Testing with a string with limited length, answer is behind null terminator\n");
-	ft_string_function_tester(ft_strnstr("Can't\0me find", "me", 11), strnstr("Can't\0me find", "me", 11));
-	printf("Testing with a string with limited length, answer is found\n");
-	ft_string_function_tester(ft_strnstr("Can't me find", "me", 11), strnstr("Can't me find", "me", 11));
 }
 
 void	ft_memalloc_tester(size_t n)
@@ -548,12 +505,13 @@ void	ft_strclr_tester(void)
 	int		i;
 
 	i = 0;
-	str = (char**)malloc(sizeof(**str) * 3);
+	str = (char**)malloc(sizeof(*str) * 4);
 	while (i < 3)
 	{
 		str[i] = (char*)malloc(sizeof(*str) * (21));
 		i++;
 	}
+	str[i] = '\0';
 	i = 0;
 	while (i < 3)
 	{
@@ -604,6 +562,20 @@ void	ft_puts(char *s)
 	write(1, s, strlen(s));
 }
 
+char	ft_toupper_char(char c)
+{
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	else
+		return (c);
+}
+
+void	ft_rot_char(unsigned int i, char c)
+{
+	c = c + i;
+	write(1, &c, 1);
+}
+
 void	ft_striter_tester(char *s1, char *s2)
 {
 	yellow();
@@ -615,6 +587,18 @@ void	ft_striter_tester(char *s1, char *s2)
 	ft_striter(s2, ft_puts);
 	ft_putchar_fd('\n', 1);
 	ft_striter("Hello", ft_puts);
+	ft_putchar_fd('\n', 1);
+}
+
+void	ft_striteri_tester(char *s1, char *s2)
+{
+	yellow();
+	printf("Test ft_striteri: Testing that str_iteri iterates a function.\n");
+	printf("\033[0m");
+	printf(":\n");
+	ft_striteri(s1, (void*)ft_rot_char);
+	ft_putchar_fd('\n', 1);
+	ft_striteri(s2, (void*)ft_rot_char);
 	ft_putchar_fd('\n', 1);
 }
 
@@ -641,18 +625,7 @@ void	ft_putcha_test(char *s1, char *s2)
 	ft_putendl_fd(s2, 2);
 }
 
-char	ft_toupper_char(char c)
-{
-	if (c >= 97 && c <= 122)
-		return (c - 32);
-	else
-		return (c);
-}
 
-char	ft_rot_char(unsigned int i, char c)
-{
-	return (c + i);
-}
 
 void	ft_strmap_test(char *s1, char *s2)
 {
@@ -686,14 +659,16 @@ void	ft_strmapi_test(char *s1, char *s2)
 	printf("Test ft_strmapi: Testing strmap by using ft_upper char version, and printing resulting string.\n");
 	printf("\033[0m");
 	printf("a\n");
-	ft_strcpy(s1_new, ft_strmapi(s1, ft_rot_char));
-	ft_strcpy(s2_new, ft_strmapi(s2, ft_rot_char));
+	ft_strcpy(s1_new, ft_strmapi(s1, (void*)ft_rot_char));
+	ft_strcpy(s2_new, ft_strmapi(s2, (void*)ft_rot_char));
 	ft_putendl_fd(s1, 2);
 	ft_putendl_fd(s2, 2);
 	ft_putendl_fd(s1_new, 2);
 	ft_putendl_fd(s2_new, 2);
 	free(s1_new);
 	free(s2_new);
+	s1_new = NULL;
+	s2_new = NULL;
 }
 
 void	ft_strequ_tester()
@@ -737,11 +712,8 @@ void	ft_strsub_tester()
 	printf("\033[0m");
 	printf(":\n");
 	ft_putendl_fd("test with 'Cut off this part Hello World!'.", 1);
-	ft_string_function_tester(ft_strsub("Cut off this part Hello World!", 18, 13), "Hello World!");
-	printf("<\n");
-	//ft_putendl_fd("test with 'Cut off this part Hello World!' with illegal values 150 and 100.", 1);
-	//ft_putendl_fd(ft_strsub("Cut off this part Hello World!", 150, 100), 1);
-	//printf("<\n");
+	ft_string_function_tester(ft_strsub("Cut off this part Hello World!", 18, 12), "Hello World!");
+	printf(":\n");
 }
 
 void	ft_strjoin_tester(char *s1, char *s2)
@@ -855,6 +827,31 @@ void	ft_putnbr_fd_test()
 	ft_putchar('\n');
 }
 
+void	ft_memset_test()
+{
+	char	*str1;
+	char	*str2;
+	char	*str3;
+	char	*str4;
+
+	str1 = (char*)malloc(sizeof(*str1) * 15);
+	str2 = (char*)malloc(sizeof(*str2) * 15);
+	str3 = (char*)malloc(sizeof(*str3) * 15);
+	str4 = (char*)malloc(sizeof(*str4) * 15);
+
+	strcpy(str1,"Hello it's me.");
+	strcpy(str2,"Hello it's me.");
+	strcpy(str3,"Hello it's me.");
+	strcpy(str4,"Hello it's me.");
+	printf("ft_memset: fills the first n bytes with constant byte c. Returns pointer.\n");
+	ft_memory_function_tester(ft_memset(str1, '$', 5), memset(str2, '$', 5));
+	ft_memory_function_tester(ft_memset(str3, '$', 15), memset(str4, '$', 15));
+	free(str1);
+	free(str2);
+	free(str3);
+	free(str4);
+}
+
 void	ft_bzero_test()
 {
 	char *str;
@@ -919,92 +916,201 @@ void	ft_memccpy_test()
 	free(str4);
 }
 
-int		main(int argc, char **argv)
+void	ft_strlen_test(char *s1, char *s2)
 {
-	size_t	str_len;
-	size_t	str_len1;
-	char	*str1;
-	char	*str2;
-	char	*str3;
-	char	*str4;
-	char	*str5;
-	char	*str6;
-	char 	*str9;
-	char 	*str10;
-	void	*str11;
-	void	*str12;
-	void	*str13;
-	void	*str14;
-	void	*str15;
-	void	*str16;
-	char	*str25;
-	char	*str26;
-	char	*str27;
-	char	*str28;
-	char	*str29;
-	char	*str30;
-	char	*str31;
-	char	*str32;
+	size_t		i;
+	size_t		j;
 
-	if (argc == 3)
-	{
-		str_len = ft_strlen(argv[2]);
-		str_len1 = ft_strlen(argv[1]);
-		str1 = (char*)malloc(sizeof(*str1) * (str_len + 1));
-		str2 = (char*)malloc(sizeof(*str2) * (str_len + 1));
-		str3 = (char*)malloc(sizeof(*str3) * (str_len + 1));
-		str4 = (char*)malloc(sizeof(*str4) * (str_len + 1));
-		str5 = (char*)malloc(sizeof(*str5) * (str_len + str_len1 + 1));
-		str6 = (char*)malloc(sizeof(*str6) * (str_len + str_len1 + 1));
-		str9 = (char*)malloc(sizeof(*str9) * (str_len + str_len1 + 1));
-		str10 = (char*)malloc(sizeof(*str10) * (str_len + str_len1 + 1));
-		str11 = (void*)malloc(sizeof(*str11) * 10);
-		str12 = (void*)malloc(sizeof(*str12) * 10);
-		str13 = (void*)malloc(sizeof(*str13) * 500);
-		str14 = (void*)malloc(sizeof(*str14) * 500);
-		str15 = (void*)malloc(sizeof(*str15) * 1000);
-		str16 = (void*)malloc(sizeof(*str16) * 1000);
-		str25 = (char*)malloc(sizeof(*str25) * 1000);
-		str26 = (char*)malloc(sizeof(*str26) * 1000);
-		str27 = (char*)malloc(sizeof(*str27) * 1000);
-		str28 = (char*)malloc(sizeof(*str28) * 1000);
-		str29 = (char*)malloc(sizeof(*str29) * 1000);
-		str30 = (char*)malloc(sizeof(*str30) * 1000);
-		str31 = (char*)malloc(sizeof(*str31) * 1000);
-		str32 = (char*)malloc(sizeof(*str32) * 1000);
-		printf("strcmp: Compared two strings. Result was: \n");
-		ft_long_int_function_tester(ft_strcmp(argv[1], argv[2]), strcmp(argv[1], argv[2]));
-		printf("ft_strncmp: Compared two strings until fifth byte. Result was: \n");
-		ft_long_int_function_tester(ft_strncmp(argv[1], argv[2], 5), strncmp(argv[1], argv[2], 5));
-		ft_long_int_function_tester(ft_strncmp("aaaaaa", "aaaaaaaaaa", 5), strncmp("aaaaaa", "aaaaaaaaaa", 5));
-		ft_long_int_function_tester(ft_strncmp("aaaaab", "aaaaaaaaaa", 5), strncmp("aaaaab", "aaaaaaaaaa", 5));
-		ft_long_int_function_tester(ft_strncmp("baaaab", "aaaaaaaaaa", 5), strncmp("baaaab", "aaaaaaaaaa", 5));
-		ft_long_int_function_tester(ft_strncmp("aacaab", "aaaaaaaaaa", 3), strncmp("aacaab", "aaaaaaaaaa", 3));
-		ft_long_int_function_tester(ft_strncmp("axcaab", "aaaaaaaaaa", 3), strncmp("axcaab", "aaaaaaaaaa", 3));
-		printf("ft_atoi: Stripped strings to an integer. Results were: \n");
-		ft_int_function_tester(ft_atoi(argv[1]), atoi(argv[1]));
-		ft_int_function_tester(ft_atoi(argv[2]), atoi(argv[2]));
-		printf("ft_strcpy: Copied first strings to an another string. Results were: \n");
-		strcpy(str1, argv[2]);
-		strcpy(str2, argv[2]);
-		ft_string_function_tester(ft_strcpy(str1, argv[1]), strcpy(str2, argv[1]));
-		free(str1);
-		printf("ft_strncpy: Copied first strings to an another string for 5 bytes. Results were: \n");
-		strcpy(str3, argv[2]);
-		strcpy(str4, argv[2]);
-		ft_string_function_tester(ft_strncpy(str3, argv[1], 5), strncpy(str4, argv[1], 5));
-		free(str3);
-		printf("ft_strchr: Returns pointer to first occurance in a string and using first letter. Results were: \n");
-		ft_string_function_tester(ft_strchr(argv[1], argv[2][0]), strchr(argv[1], argv[2][0]));
-		printf("Original string was: %s\n", argv[1]);
-		printf("ft_strrchr: Returns pointer to the last occurance in a string and using first letter. Results were: \n");
-		ft_string_function_tester(ft_strrchr(argv[1], argv[2][0]), strrchr(argv[1], argv[2][0]));
-		printf("Original string was: %s\n", argv[1]);
-		printf("ft_strstr: Returns pointer to the first occurance of a substring and using substring. Results were: \n");
-		ft_string_function_tester(ft_strstr(argv[1], argv[2]), strstr(argv[1], argv[2]));
-		printf("Original string was: %s\n", argv[1]);
-		ft_string_function_tester(ft_strstr("NOt gonne find me", "Hello"), strstr("NOt gonne find me", "Hello"));
-		printf("Original strings were: NOt gonne find me and Hello\n");
+	yellow();
+	printf("ft_strlen: calculate length of the string and compare to system function.\n");
+	printf("\033[0m");
+	i = ft_strlen(s1);
+	j = strlen(s1);
+	ft_long_int_function_tester(i, j);
+	i = ft_strlen(s2);
+	j = strlen(s2);
+	ft_long_int_function_tester(i, j);
+}
+
+void	ft_strdup_test(char *s1, char *s2)
+{
+	char *str;
+	char *str2;
+	char *str3;
+	char *str4;
+
+	str = (char*)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
+	str2 = (char*)malloc(sizeof(*s2) * (ft_strlen(s2) + 1));
+	str3 = (char*)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
+	str4 = (char*)malloc(sizeof(*s2) * (ft_strlen(s2) + 1));
+	yellow();
+	printf("ft_strdup: returns a pointer to a new string which is duplicate of given params.\n");
+	printf("\033[0m");
+	str = strdup(s1);
+	str3 = ft_strdup(s1);
+	str2 = strdup(s2);
+	str4 = ft_strdup(s2);
+	ft_string_function_tester(str, str3);
+	ft_string_function_tester(str2, str4);
+	free(str);
+	free(str2);
+	free(str3);
+	free(str4);
+}
+
+void	ft_strcpy_test(char *s1, char *s2)
+{
+	char *str;
+	char *str2;
+	char *str3;
+	char *str4;
+
+	str = (char*)malloc(sizeof(*str) * (ft_strlen(s1) + 1));
+	str2 = (char*)malloc(sizeof(*str2) * (ft_strlen(s2) + 1));
+	str3 = (char*)malloc(sizeof(*str3) * (ft_strlen(s1) + 1));
+	str4 = (char*)malloc(sizeof(*str4) * (ft_strlen(s2) + 1));
+	yellow();
+	printf("ft_strcpy: copies a str to dst.\n");
+	printf("\033[0m");
+	strcpy(str, s1);
+	ft_strcpy(str3, s1);
+	strcpy(str2, s2);
+	ft_strcpy(str4, s2);
+	ft_string_function_tester(str, str3);
+	ft_string_function_tester(str2, str4);
+	free(str);
+	free(str2);
+	free(str3);
+	free(str4);
+}
+
+void	ft_strncpy_test(char *s1, char *s2)
+{
+	char *str;
+	char *str2;
+	char *str3;
+	char *str4;
+
+	str = (char*)malloc(sizeof(*str) * (ft_strlen(s2) + 1));
+	str2 = (char*)malloc(sizeof(*str2) * (ft_strlen(s2) + 1));
+	str3 = (char*)malloc(sizeof(*str3) * (ft_strlen(s2) + 1));
+	str4 = (char*)malloc(sizeof(*str4) * (ft_strlen(s2) + 1));
+	yellow();
+	printf("ft_strncpy: copies params str to dst until nth byte.\n");
+	printf("\033[0m");
+	strncpy(str, s1, ft_strlen(s2));
+	ft_strncpy(str3, s1, ft_strlen(s2));
+	strncpy(str2, s2, ft_strlen(s2) / 2);
+	ft_strncpy(str4, s2, ft_strlen(s2) / 2);
+	ft_cmp_function_tester(ft_memcmp(str, str3, ft_strlen(s2)), 0);
+	ft_cmp_function_tester(ft_memcmp(str4, str2, ft_strlen(s2) / 2), 0);
+	free(str);
+	free(str2);
+	free(str3);
+	free(str4);
+}
+
+void	ft_strchr_test(char *s1, char *s2)
+{
+	yellow();
+	printf("ft_strchr: Returns pointer to first occurance in a string and using first letter. Results were: \n");
+	ft_default();
+	ft_string_function_tester(ft_strchr(s1, s2[0]), strchr(s1, s2[0]));
+	printf("Test if it accounts null character as well.\n");
+	ft_string_function_tester(ft_strchr(s1, '\0'), strchr(s1, '\0'));
+	printf("And test if it returns null when it is not found.\n");
+	ft_string_function_tester(ft_strchr("Not found", 'z'), strchr("Not found", 'z'));
+}
+
+
+void	ft_strrchr_test(char *s1, char *s2)
+{
+	yellow();
+	printf("ft_strrchr: Returns pointer to the last occurance in a string and using first letter. Results were: \n");
+	ft_default();
+	ft_string_function_tester(ft_strrchr(s1, s2[0]), strrchr(s1, s2[0]));
+	printf("Test if it accounts null character as well.\n");
+	ft_string_function_tester(ft_strrchr(s1, '\0'), strrchr(s1, '\0'));
+	printf("And test if it returns null when it is not found.\n");
+	ft_string_function_tester(ft_strrchr("Not found", 'z'), strrchr("Not found", 'z'));
+}
+
+void	ft_strstr_test(char *s1, char *s2)
+{
+	/*char str[3];
+
+	strncpy(str, "hey", 3);*/
+	yellow();
+	printf("ft_strstr: Returns pointer to the first occurance of a substring and using substring. Results were: \n");
+	ft_default();
+	ft_string_function_tester(ft_strstr(s1, s2), strstr(s1, s2));
+	printf("Original string was: %s\n", s1);
+	printf("Test if returns null when it is not found.\n");
+	ft_string_function_tester(ft_strstr("NOt gonne find me", "Hello"), strstr("NOt gonne find me", "Hello"));
+	ft_string_function_tester(ft_strstr("Terminatorr", "Terminator"), strstr("Terminatorr", "Terminator"));
+	printf("Following test needs to be run without -Wall -Wextra -Werror flag to test that it does not cmp null terminators.\n");
+	/*ft_string_function_tester(ft_strstr("hey", str), strstr("hey", str));*/
+}
+
+void	ft_strnstr_tester(char *big, char *little)
+{
+	yellow();
+	printf("Test ft_strnstr: Testing that substring can be found.\n");
+	ft_default();
+	printf("Testing with a string with limited length, answer is behind\n");
+	ft_string_function_tester(ft_strnstr("Can't find me", "me", 11), strnstr("Can't find me", "me", 11));
+	printf("search using a first string of par with limited length of 5\n");
+	printf("both functions make a segfault if parameter is too short: aaanaa naa\n");
+	ft_string_function_tester(ft_strnstr(big, little, ft_strlen(little)), strnstr(big, little, ft_strlen(little)));
+	printf("search using a first string of par with empty string of limited length of 5\n");
+	ft_string_function_tester(ft_strnstr(big, "", 5), strnstr(big, "", 5));
+	printf("search using a first string of par with null string of limited length of 5\n");
+	printf("segfault tester: uncomment to test\n");
+	/*ft_string_function_tester(ft_strnstr(big, NULL, n), strnstr(big, NULL, n));*/
+	printf("Testing with a string with limited length, answer is behind null terminator\n");
+	ft_string_function_tester(ft_strnstr("Can't\0me find", "me", 11), strnstr("Can't\0me find", "me", 11));
+	printf("Testing with a string with limited length, answer is found\n");
+	ft_string_function_tester(ft_strnstr("Can't me find", "me", 11), strnstr("Can't me find", "me", 11));
+}
+
+void	ft_strcmp_test(char *s1, char *s2)
+{
+	char *str;
+	char *str2;
+
+	str = (char*)malloc(sizeof(*str) * (ft_strlen(s1) + 1));
+	str2 = (char*)malloc(sizeof(*str2) * (ft_strlen(s2) + 1));
+	strcpy(str, s1);
+	strcpy(str2, s2);
+	yellow();
+	printf("ft_strcmp: Compared two strings. Result was: \n");
+	printf("\033[0m");
+	ft_cmp_function_tester(ft_strcmp(s1, str), strcmp(s1, str));
+	ft_cmp_function_tester(ft_strcmp(s2, str2), strcmp(s2, str2));
+	yellow();
+	printf("ft_strncmp: Compared two params until half of the length of param. Result was: \n");
+	printf("\033[0m");
+	ft_cmp_function_tester(ft_strncmp(s1, str, ft_strlen(str) / 2), strncmp(s1, str, ft_strlen(str) / 2));
+	ft_cmp_function_tester(ft_strncmp(s2, str2, ft_strlen(str2) / 2), strncmp(s2, str2, ft_strlen(str) / 2));
+	ft_cmp_function_tester(ft_strncmp("aaaaaa", "aaaaaaaaaa", 5), strncmp("aaaaaa", "aaaaaaaaaa", 5));
+	ft_cmp_function_tester(ft_strncmp("aaaaab", "aaaaaaaaaa", 5), strncmp("aaaaab", "aaaaaaaaaa", 5));
+	ft_cmp_function_tester(ft_strncmp("baaaab", "aaaaaaaaaa", 5), strncmp("baaaab", "aaaaaaaaaa", 5));
+	ft_cmp_function_tester(ft_strncmp("aacaab", "aaaaaaaaaa", 3), strncmp("aacaab", "aaaaaaaaaa", 3));
+	ft_cmp_function_tester(ft_strncmp("axcaab", "aaaaaaaaaa", 3), strncmp("axcaab", "aaaaaaaaaa", 3));
+}
+
+void	ft_atoi_test(char *s1, char *s2)
+{
+	printf("ft_atoi: Stripped strings to an integer. Results were: \n");
+	ft_int_function_tester(ft_atoi(s1), atoi(s2));
+	ft_int_function_tester(ft_atoi(s1), atoi(s2));
+	ft_int_function_tester(ft_atoi("38713813138aaaa"), atoi("38713813138aaaa"));
+	ft_int_function_tester(ft_atoi("-387138aaaa"), atoi("-387138aaaa"));
+	ft_int_function_tester(ft_atoi("- 42"), atoi("- 42"));
+}
+
+void	ft_is_test()
+{
 		printf("ft_isalpha: Validates that unsigned char is part of alphabet. Results were: \n");
 		ft_int_function_tester(ft_isalpha('a'), isalpha('a'));
 		ft_int_function_tester(ft_isalpha('H'), isalpha('H'));
@@ -1031,9 +1137,10 @@ int		main(int argc, char **argv)
 		ft_int_function_tester(ft_isascii((unsigned char)(127)), isascii((unsigned char)(127)));
 		printf("ft_isprint: Validates that tested value is a printable character. Results were: \n");
 		ft_int_function_tester(ft_isprint((unsigned char)(1)), isprint((unsigned char)(1)));
+		ft_int_function_tester(ft_isprint((unsigned char)(20)), isprint((unsigned char)(20)));
 		ft_int_function_tester(ft_isprint((unsigned char)('a')), isprint((unsigned char)('a')));
 		ft_int_function_tester(ft_isprint((unsigned char)('n')), isprint((unsigned char)('n')));
-		ft_int_function_tester(ft_isprint((unsigned char)(126)), isprint((unsigned char)(126)));
+		ft_int_function_tester(ft_isprint((unsigned char)(127)), isprint((unsigned char)(127)));
 		ft_int_function_tester(ft_isprint((unsigned char)(184)), isprint((unsigned char)(184)));
 		ft_int_function_tester(ft_isprint((unsigned char)(255)), isprint((unsigned char)(255)));
 		ft_int_function_tester(ft_isprint((unsigned char)(127)), isprint((unsigned char)(127)));
@@ -1053,32 +1160,14 @@ int		main(int argc, char **argv)
 		ft_int_function_tester(ft_tolower((unsigned char)('C')), tolower((unsigned char)('C')));
 		ft_int_function_tester(ft_tolower((unsigned char)('Z')), tolower((unsigned char)('Z')));
 		ft_int_function_tester(ft_tolower((unsigned char)(127)), tolower((unsigned char)(127)));
-		printf("ft_memset: fills the first n bytes with constant byte c. Returns pointer.\n");
-		ft_memory_function_tester(ft_memset(str11, 1, 10), memset(str12, 1, 10));
-		free(str11);
-		ft_memory_function_tester(ft_memset(str13, '!', 499), memset(str14, '!', 499));
-		free(str13);
-		ft_memory_function_tester(ft_memset(str15, 'a', 1000), memset(str16, 'a', 1000));
-		free(str15);
-		ft_memchr_tester("Hello it's me.", '.', 50);
-		ft_memchr_tester("Hello it's me.", ',', 50);
-		ft_memchr_tester("Hello it's me.", 'm', 50);
-		ft_memchr_tester("Hello it's me.", 'i', 50);
-		ft_memchr_tester("Hello it's me.", 'H', 50);
-		ft_memcmp_tester(argv[1], argv[2], sizeof(argv[1]));
-		ft_strcat_tester(argv[1], argv[2]);
-		ft_strncat_tester(argv[1], argv[2], sizeof(argv[2]));
-		ft_strlcat_tester(argv[1], argv[2], ft_strlen(argv[1]));
-		ft_strnstr_tester(argv[1], argv[2], 5);
-		ft_memalloc_tester(9);
-		ft_memdel_tester();
-		ft_strnew_tester(9);
-		ft_strdel_tester();
-		ft_strclr_tester();
-		ft_striter_tester(argv[1], argv[2]);
+}
+
+int		main(int argc, char **argv)
+{
+	if (argc == 3)
+	{
+
 		ft_putcha_test(argv[1], argv[2]);
-		ft_strmap_test(argv[1], argv[2]);
-		ft_strmapi_test(argv[1], argv[2]);
 		ft_strequ_tester();
 		ft_strnequ_tester();
 		ft_strsub_tester();
@@ -1089,10 +1178,36 @@ int		main(int argc, char **argv)
 		ft_putcha_test2(argv[1], argv[2]);
 		ft_putnbr_test();
 		ft_putnbr_fd_test();
+		ft_memset_test();
 		ft_bzero_test();
 		ft_memcpy_test();
 		ft_memccpy_test();
 		ft_memmove_tester();
+		ft_memchr_tester();
+		ft_memcmp_tester(argv[1], argv[2]);
+		ft_strlen_test(argv[1], argv[2]);
+		ft_strdup_test(argv[1], argv[2]);
+		ft_strcpy_test(argv[1], argv[2]);
+		ft_strncpy_test(argv[1], argv[2]);
+		ft_strcat_tester(argv[1], argv[2]);
+		ft_strncat_tester(argv[1], argv[2]);
+		ft_strlcat_tester(argv[1], argv[2]);
+		ft_strchr_test(argv[1], argv[2]);
+		ft_strrchr_test(argv[1], argv[2]);
+		ft_strstr_test(argv[1], argv[2]);
+		ft_strnstr_tester(argv[1], argv[2]);
+		ft_strcmp_test(argv[1], argv[2]);
+		ft_atoi_test(argv[1], argv[2]);
+		ft_is_test();
+		ft_memalloc_tester(9);
+		ft_memdel_tester();
+		ft_strnew_tester(9);
+		ft_strdel_tester();
+		ft_strclr_tester();
+		ft_striter_tester(argv[1], argv[2]);
+		ft_striteri_tester(argv[1], argv[2]);
+		ft_strmap_test(argv[1], argv[2]);
+		ft_strmapi_test(argv[1], argv[2]);
 	}
 	return (0);
 }

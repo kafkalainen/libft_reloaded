@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:55:32 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/04 17:12:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/17 12:48:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
-#include <string.h>
 
 char		*ft_strcpy(char *dest, const char *src)
 {

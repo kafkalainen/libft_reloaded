@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 09:20:30 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/05 09:25:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/18 08:18:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
-#include <string.h>
 
 char		*ft_strncat(char *dest, const char *src, size_t n)
 {

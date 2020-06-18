@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 15:24:51 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/11 15:33:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/18 16:06:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
-#include <string.h>
 #include <stdlib.h>
 
 char		*ft_strnew(size_t size)

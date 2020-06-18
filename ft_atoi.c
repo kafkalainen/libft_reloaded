@@ -6,34 +6,34 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 13:47:24 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/04 17:12:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/18 13:41:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-int		ft_atoi(char *str)
+int		ft_atoi(const char *nptr)
 {
-	int		i;
-	int		integer;
-	int		sign;
+	size_t		i;
+	long int	integer;
+	int			sign;
 
 	i = 0;
 	integer = 0;
 	sign = 1;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' ||
-		str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+	while (nptr[i] == ' ' || nptr[i] == '\t' || nptr[i] == '\n' ||
+		nptr[i] == '\v' || nptr[i] == '\f' || nptr[i] == '\r')
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		if (str[i] == '-')
+		if (nptr[i] == '-')
 			sign *= -1;
 		i++;
 	}
-	while (str[i] > '0' && str[i] < '9')
+	while (nptr[i] > '0' && nptr[i] < '9')
 	{
-		integer = integer * 10 + (str[i] - '0');
+		integer = integer * 10 + (nptr[i] - '0');
 		i++;
 	}
-	return (sign * integer);
+	return ((int)(sign * integer));
 }

@@ -6,11 +6,10 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 09:28:23 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 14:58:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/17 10:55:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "./libft.h"
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n)
@@ -20,8 +19,8 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n)
 	const char		*str2;
 
 	i = 0;
-	str1 = s1;
-	str2 = s2;
+	str1 = (char*)s1;
+	str2 = (char*)s2;
 	while (i < n)
 	{
 		if ((unsigned char)str1[i] > (unsigned char)str2[i] ||

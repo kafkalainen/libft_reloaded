@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 10:48:48 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/08 09:53:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/18 13:28:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
-#include <string.h>
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {

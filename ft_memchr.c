@@ -6,11 +6,10 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 13:58:46 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/09 14:05:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/17 10:54:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "./libft.h"
 
 void		*ft_memchr(const void *s, int c, size_t n)
@@ -19,10 +18,10 @@ void		*ft_memchr(const void *s, int c, size_t n)
 	const char		*temp;
 
 	i = 0;
-	temp = s;
+	temp = (char*)s;
 	while (i < n && temp[i] != c)
 		i++;
-	if (temp[i] == c)
+	if ((unsigned char)temp[i] == (unsigned char)c)
 		return (void*)(s + i);
 	else
 		return (NULL);

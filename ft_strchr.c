@@ -6,11 +6,10 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 12:47:22 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/08 09:19:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/18 12:58:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "./libft.h"
 
 char		*ft_strchr(const char *s, int c)

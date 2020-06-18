@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 08:40:25 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/16 10:39:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/17 15:18:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void		*ft_memset(void *s, int c, size_t n)
 {
-	size_t		i;
-	char		*temp;
+	size_t				i;
+	unsigned char		*temp;
 
 	i = 0;
-	temp = s;
+	temp = (unsigned char*)s;
 	while (i < n)
 	{
-		temp[i] = c;
+		temp[i] = (unsigned char)c;
 		i++;
 	}
 	return ((void*)temp);

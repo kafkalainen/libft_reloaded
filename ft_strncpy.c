@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 15:49:42 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/04 18:13:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/17 13:24:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
-#include <string.h>
 
 char		*ft_strncpy(char *dest, const char *src, size_t n)
 {
@@ -23,7 +22,7 @@ char		*ft_strncpy(char *dest, const char *src, size_t n)
 		dest[i] = src[i];
 		i++;
 	}
-	if (i < n)
+	while (i < n)
 	{
 		dest[i] = '\0';
 		i++;

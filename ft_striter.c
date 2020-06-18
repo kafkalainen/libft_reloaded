@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 08:48:46 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 10:38:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/18 16:21:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@ void		ft_striter(char *s, void (*f)(char *))
 	unsigned int	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	if (s != 0)
 	{
-		f(&s[i]);
-		i++;
+		while (s[i] != '\0')
+		{
+			f(&s[i]);
+			i++;
+		}
 	}
+	return ;
 }

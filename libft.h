@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/16 09:02:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/18 17:04:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 # define LIBFT_H
 # include <string.h>
 
-int			ft_atoi(char *str);
+typedef		struct s_list
+{
+			void *content;
+			size_t content_size;
+			struct s_list *next;
+}			t_list;
+
+int			ft_atoi(const char *nptr);
 
 void		ft_bzero(void *s, size_t n);
 

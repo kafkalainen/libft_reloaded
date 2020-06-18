@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 16:18:59 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 10:41:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/18 16:08:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		ft_strclr(char *s)
 {
-	int		i;
+	size_t		i;
 
 	i = 0;
 	while (s[i] != '\0')
