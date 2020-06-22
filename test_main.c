@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:42:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/18 16:50:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/22 17:59:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -576,12 +576,18 @@ void	ft_rot_char(unsigned int i, char c)
 	write(1, &c, 1);
 }
 
+void	ft_rot2_char(unsigned int i, char *c)
+{
+	*c = *c + i;
+	write(1, c, 1);
+}
+
 void	ft_striter_tester(char *s1, char *s2)
 {
 	yellow();
 	printf("Test ft_striter: Testing that str_iter iterates a function.\n");
 	printf("\033[0m");
-	printf("a\n");
+	printf(":\n");
 	ft_striter(s1, ft_puts);
 	ft_putchar_fd('\n', 1);
 	ft_striter(s2, ft_puts);
@@ -596,9 +602,9 @@ void	ft_striteri_tester(char *s1, char *s2)
 	printf("Test ft_striteri: Testing that str_iteri iterates a function.\n");
 	printf("\033[0m");
 	printf(":\n");
-	ft_striteri(s1, (void*)ft_rot_char);
+	ft_striteri(s1, ft_rot2_char);
 	ft_putchar_fd('\n', 1);
-	ft_striteri(s2, (void*)ft_rot_char);
+	ft_striteri(s2, ft_rot2_char);
 	ft_putchar_fd('\n', 1);
 }
 
@@ -607,20 +613,20 @@ void	ft_putcha_test(char *s1, char *s2)
 	yellow();
 	printf("Test ft_putchar_fd: Testing that ft_putchar puts out a character.\n");
 	printf("\033[0m");
-	printf("a\n");
+	printf(":\n");
 	ft_putchar_fd(s1[0], 1);
 	ft_putchar_fd(s2[0], 1);
 	yellow();
 	printf("Test ft_putstr_fd: Testing that ft_putstr puts out a string.\n");
 	printf("\033[0m");
-	printf("a\n");
+	printf(":\n");
 	ft_putstr_fd(s1, 1);
 	ft_putstr_fd(s2, 1);
 	ft_putchar_fd('\n', 1);
 	yellow();
 	printf("Test ft_putendl_fd: Testing that ft_puendl puts out a string with nl to 2 fd.\n");
 	printf("\033[0m");
-	printf("a\n");
+	printf(":\n");
 	ft_putendl_fd(s1, 2);
 	ft_putendl_fd(s2, 2);
 }
@@ -637,7 +643,7 @@ void	ft_strmap_test(char *s1, char *s2)
 	yellow();
 	printf("Test ft_strmap: Testing strmap by using ft_upper char version, and printing resulting string.\n");
 	printf("\033[0m");
-	printf("a\n");
+	printf(":\n");
 	ft_strcpy(s1_new, ft_strmap(s1, ft_toupper_char));
 	ft_strcpy(s2_new, ft_strmap(s2, ft_toupper_char));
 	ft_putendl_fd(s1, 2);
@@ -658,7 +664,7 @@ void	ft_strmapi_test(char *s1, char *s2)
 	yellow();
 	printf("Test ft_strmapi: Testing strmap by using ft_upper char version, and printing resulting string.\n");
 	printf("\033[0m");
-	printf("a\n");
+	printf(":\n");
 	ft_strcpy(s1_new, ft_strmapi(s1, (void*)ft_rot_char));
 	ft_strcpy(s2_new, ft_strmapi(s2, (void*)ft_rot_char));
 	ft_putendl_fd(s1, 2);
@@ -1162,6 +1168,193 @@ void	ft_is_test()
 		ft_int_function_tester(ft_tolower((unsigned char)(127)), tolower((unsigned char)(127)));
 }
 
+void	ft_lstadd_test()
+{
+	t_list		*list;
+	t_list		*second;
+	char		*str;
+	char		*str2;
+
+	str = (char*)malloc(sizeof(*str) * 14);
+	str = strcpy(str, "Hello Marvin.");
+	str2 = (char*)malloc(sizeof(*str) * 14);
+	str2 = strcpy(str2, "You are sad..");
+	yellow();
+	printf("ft_lstadd: Added new element to list. Result was: \n");
+	printf("\033[0m");
+	list = ft_lstnew(str, sizeof(*str) * 14);
+	second = ft_lstnew(str2, sizeof(*str2) * 14);
+	ft_lstadd(&list, second);
+	if (strcmp((char*)list->content, "You are sad..") == 0)
+		printf("OK: Node added to the begin of the list.\n");
+	else
+		printf("KO: Node adding failed to begin %s\n", (char*)list->content);
+}
+
+void	ft_lstnew_test()
+{
+	t_list		*list;
+	char		*str;
+
+	str = (char*)malloc(sizeof(*str) * 14);
+	str = strcpy(str, "Hello Marvin.");
+	list = ft_lstnew(str, sizeof(*str) * 14);
+	yellow();
+	printf("ft_lstnew: Added new string to list. Result was: \n");
+	printf("\033[0m");
+	if (strcmp((char*)(list->content), "Hello Marvin.") == 0)
+		printf("OK: Content added successfully.\n");
+	else
+		printf("KO: Content adding failed.\n");
+	list = ft_lstnew(NULL, 86);
+	if (list->content_size == 0)
+		printf("OK: NULL pointer handled successfully.\n");
+	else
+		printf("KO: NULL pointer returned not null.\n");
+}
+
+void		ft_del_test(void *data, size_t i)
+{
+	write(1, "Del OK: ", 8);
+	write(1, (char*)data, i);
+	write(1, "\n", 1);
+}
+
+void		ft_lstdelone_test()
+{
+	t_list	*list;
+	char	*str;
+
+	yellow();
+	printf("ft_lstdelone: Tested deleting one item in a list. Result was: \n");
+	printf("\033[0m");
+	str = (char*)malloc(sizeof(*str) * 6);
+	str = strcpy(str, "hello");
+	list = (t_list*)malloc(sizeof(t_list));
+	list->content = str;
+	list->content_size = sizeof(str) * 6;
+	ft_lstdelone(&list, ft_del_test);
+	if (list == NULL)
+		printf("OK: List is now set to NULL.\n");
+	else
+		printf("KO: List is not set to NULL.\n");
+}
+
+void		ft_lstdel_test(void)
+{
+	t_list	*list;
+	t_list	*second;
+	t_list	*third;
+	char	*str1;
+	char	*str2;
+	char	*str3;
+
+	yellow();
+	printf("ft_lstdel: Tested deleting all items in a list. Result was: \n");
+	printf("\033[0m");
+	str1 = (char*)malloc(sizeof(*str1) * 6);
+	str1 = strcpy(str1, "hello");
+	str2 = (char*)malloc(sizeof(*str2) * 6);
+	str2 = strcpy(str2, "hello");
+	str3 = (char*)malloc(sizeof(*str3) * 6);
+	str3 = strcpy(str3, "hello");
+	list = (t_list *)malloc(sizeof(t_list));
+	second = (t_list *)malloc(sizeof(t_list));
+	third = (t_list *)malloc(sizeof(t_list));
+	list->content = str1;
+	list->content_size = sizeof(*str1) * 6;
+	list->next = second;
+	second->content = str2;
+	second->content_size = sizeof(*str2) * 6;
+	second->next = third;
+	third->content = str3;
+	third->content_size = sizeof(*str3) * 6;
+	third->next = NULL;
+	ft_lstdel(&list, ft_del_test);
+	if (list == NULL)
+		printf("OK: List is now set to NULL.\n");
+	else
+		printf("KO: List is not set to NULL.\n");
+}
+
+void	ft_lstiter_function(t_list *elem)
+{
+	t_list	*temp;
+
+	if (elem->content == NULL)
+		return ;
+	temp = elem;
+	printf("%d\n", *(int*)(temp->content));
+}
+
+void	ft_printsize_function(t_list *elem)
+{
+	t_list	*temp;
+
+	if (elem->content == NULL)
+		return ;
+	temp = elem;
+	printf("%ld\n", temp->content_size);
+}
+
+t_list	*ft_lstmap_function(t_list *elem)
+{
+	t_list	*map;
+
+	map = (t_list*)malloc(sizeof(*map));
+	bzero(map, sizeof(t_list));
+	map->content = (void*)malloc(sizeof(elem->content_size));
+	map->content_size = elem->content_size;
+	map->content = elem->content;
+	return (map);
+}
+
+void	ft_iter_test(void)
+{
+	t_list	*one;
+	int		nb1;
+	int		nb2;
+	int		nb3;
+
+	one = (t_list*)malloc(sizeof(t_list));
+	nb1 = 22;
+	nb2 = 33;
+	nb3 = 44;
+	one = ft_lstnew(&nb1, sizeof(int));
+	ft_lstadd(&one, ft_lstnew(&nb2, sizeof(int)));
+	ft_lstadd(&one, ft_lstnew(&nb3, sizeof(int)));
+	yellow();
+	printf("ft_lstiter: Iterate a function at all items in a list. Result was: \n");
+	printf("\033[0m");
+	ft_lstiter(one, ft_lstiter_function);
+	ft_lstdel(&one, ft_del_test);
+}
+
+void	ft_map_test(void)
+{
+	t_list	*one;
+	t_list	*two;
+	int		nb1;
+	int		nb2;
+	int		nb3;
+
+	one = (t_list*)malloc(sizeof(t_list));
+	two = (t_list*)malloc(sizeof(t_list));
+	nb1 = 22;
+	nb2 = 33;
+	nb3 = 44;
+	one = ft_lstnew(&nb1, sizeof(int));
+	ft_lstadd(&one, ft_lstnew(&nb2, sizeof(int)));
+	ft_lstadd(&one, ft_lstnew(&nb3, sizeof(int)));
+	yellow();
+	printf("ft_lstmap: Create a new list by iterating a function to all items in a list. Result was: \n");
+	printf("\033[0m");
+	ft_lstiter(one, ft_lstiter_function);
+	two = ft_lstmap(one, ft_lstmap_function);
+	ft_lstiter(two, ft_lstiter_function);
+}
+
+
 int		main(int argc, char **argv)
 {
 	if (argc == 3)
@@ -1208,6 +1401,12 @@ int		main(int argc, char **argv)
 		ft_striteri_tester(argv[1], argv[2]);
 		ft_strmap_test(argv[1], argv[2]);
 		ft_strmapi_test(argv[1], argv[2]);
+		ft_lstnew_test();
+		ft_lstdelone_test();
+		ft_lstdel_test();
+		ft_lstadd_test();
+		ft_iter_test();
+		ft_map_test();
 	}
 	return (0);
 }
