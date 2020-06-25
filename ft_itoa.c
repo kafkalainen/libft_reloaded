@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 17:01:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/15 18:53:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:21:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,40 +26,53 @@ static void		ft_nb_assign(int len, char *str, int n)
 	}
 }
 
-static int		ft_change_sign(char *str, int n)
+static int		ft_int_len(int n)
 {
+	int		i;
+
+	i = 0;
+	if (n == -2147483648)
+	{
+		n =  -214748364;
+		i++;
+	}
 	if (n < 0)
 	{
 		n *= -1;
-		str[0] = '-';
+		i++;
 	}
-	return (n);
+	while (n > 0)
+	{
+		n = n / 10;
+		i++;
+	}
+	return (i);
 }
 
 char			*ft_itoa(int n)
 {
-	int		nb;
+	int		original_len;
 	int		len;
 	char	*str;
 
-	nb = n;
-	len = 0;
-	if (n < 0)
-	{
-		nb *= -1;
-		len++;
-	}
-	while (nb > 0)
-	{
-		nb = nb / 10;
-		len++;
-	}
+	len = ft_int_len(n);
+	original_len = len;
 	str = (char*)malloc(sizeof(*str) * (len + 1));
 	if (str != NULL)
 	{
-		n = ft_change_sign(str, n);
+		if (n == -2147483648)
+		{
+			str[len - 1] = 8 + '0';
+			len--;
+			n = -214748364;
+		}
+		if (n < 0)
+		{
+			str[0] = '-';
+			n *= -1;
+		}
 		ft_nb_assign(len, str, n);
-		str[len] = '\0';
+		str[original_len] = '\0';
 	}
 	return (str);
 }

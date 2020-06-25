@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 08:46:17 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/22 12:03:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/25 12:29:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
 	{
 		item = *alst;
 		*alst = item->next;
-		del(item->content, sizeof(item->content_size));
+		del(item->content, item->content_size);
 		free(item);
 		item = NULL;
 	}

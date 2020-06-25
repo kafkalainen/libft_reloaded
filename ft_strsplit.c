@@ -6,11 +6,10 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 08:09:16 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/15 16:58:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:30:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include <stdlib.h>
 #include "libft.h"
 
@@ -37,7 +36,6 @@ static void		ft_divide_word(char const *s, size_t i, size_t len, char **arr)
 {
 	if (len > 0)
 	{
-		arr[i] = ft_strnew(len);
 		arr[i] = ft_strsub(s - len, 0, len);
 	}
 }

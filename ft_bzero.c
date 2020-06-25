@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 10:21:23 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/16 10:42:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/25 12:44:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		ft_bzero(void *s, size_t n)
 	char	*temp;
 
 	i = 0;
-	temp = s;
+	temp = (char*)s;
 	while (i < n)
 	{
 		temp[i] = '\0';

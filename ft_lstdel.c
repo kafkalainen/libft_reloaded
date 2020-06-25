@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 08:47:38 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/22 12:04:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/25 14:20:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 void		ft_lstdel(t_list **alst, void (*del)(void*, size_t))
 {
-		t_list *item;
+	t_list *item;
 
 	while (*alst != NULL)
 	{
 		item = *alst;
 		*alst = item->next;
-		del(item->content, sizeof(item->content_size));
+		del(item->content, item->content_size);
 		free(item);
 		item = NULL;
 	}

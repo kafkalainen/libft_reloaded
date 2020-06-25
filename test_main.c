@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:42:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/22 17:59:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/25 17:05:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,35 @@ void	ft_default(void) {
 	printf("\033[0m");
 }
 
-void ft_memory_function_tester(void *own, void *system)
-{
-	char *o;
-	char *s;
 
-	o = own;
-	s = system;
+void	ft_main_strdel(char **as)
+{
+	if (*as != NULL)
+	{
+		free(*as);
+		*as = NULL;
+	}
+}
+
+void	ft_main_strarrdel(char **as, size_t	size)
+{
+	size_t		i;
+
+	i = 0;
+	if (as != NULL)
+	{
+		while (i < size)
+		{
+			ft_main_strdel(&as[i]);
+			i++;
+		}
+		free(as);
+		as = NULL;
+	}
+}
+
+void ft_memory_function_tester(void *own, void *system, size_t siz)
+{
 	if (own == NULL && system == NULL)
 	{
 		printf("\033[1;32m");
@@ -48,17 +70,15 @@ void ft_memory_function_tester(void *own, void *system)
 	}
 	else
 	{
-		if (strcmp(o, s) == 0)
+		if (memcmp(own, system, siz) == 0)
 		{
 			printf("\033[1;32m");
 			printf("strcmp after char* cast: OK\n");
-			printf("own: %s\nsystem: %s\n", o, s);
 			printf("\033[0m");
 		}
 		else
 		{
 			printf("\033[1;31m");
-			printf("strcmp after char* cast: KO\nown: %s\nsystem: %s\n", o, s);
 			printf("\033[0m");
 		}
 	}
@@ -77,13 +97,15 @@ void ft_string_function_tester(char *own, char *system)
 		if (strcmp(own, system) == 0)
 		{
 			printf("\033[1;32m");
-			printf("strcmp: OK\nown: %s\nsystem: %s\n", own, system);
+			printf("strcmp: OK\n");
+			/*printf("own: %s\nsystem: %s\n", own, system);*/
 			printf("\033[0m");
 		}
 		else
 		{
 			printf("\033[1;31m");
-			printf("strcmp: KO\nown: %s\nsystem: %s\n", own, system);
+			printf("strcmp: KO\n");
+			/*printf("own: %s\nsystem: %s\n", own, system);*/
 			printf("\033[0m");
 		}
 	}
@@ -110,13 +132,15 @@ void ft_int_function_tester(int own, int system)
 	if (own == system)
 	{
 		printf("\033[1;32m");
-		printf("diff: OK\nown: %d\nsystem: %d\n", own, system);
+		printf("diff: OK\n");
+		/*printf("own: %d\nsystem: %d\n", own, system);*/
 		printf("\033[0m");
 	}
 	else
 	{
 		printf("\033[1;31m");
-		printf("diff: KO\nown: %d\nsystem: %d\n", own, system);
+		printf("diff: KO\n");
+		printf("own: %d\nsystem: %d\n", own, system);
 		printf("\033[0m");
 	}
 }
@@ -156,9 +180,9 @@ void ft_memchr_tester()
 	test = (char*)malloc(sizeof(*test) * 15);
 	strcpy(test, "Hello it's me.");
 	printf("ft_memchr: searches mem for char c and returns a pointer to where first instance is found.\n");
-	ft_memory_function_tester(ft_memchr(test, 'r', 14), memchr(test, 'r', 14));
-	ft_memory_function_tester(ft_memchr(test, '.', 14), memchr(test, '.', 14));
-	ft_memory_function_tester(ft_memchr(test, 'o', 20), memchr(test, 'o', 20));
+	ft_memory_function_tester(ft_memchr(test, 'r', 14), memchr(test, 'r', 14), 15);
+	ft_memory_function_tester(ft_memchr(test, '.', 14), memchr(test, '.', 14), 1);
+	ft_memory_function_tester(ft_memchr(test, 'o', 20), memchr(test, 'o', 20), 11);
 	free(test);
 }
 
@@ -173,19 +197,19 @@ void ft_memmove_tester()
 	yellow();
 	printf("ft_memmove: moves a src to a temp and copies temp to dest and returns a pointer to dest.\n");
 	str = (char*)malloc(sizeof(*str) * 20);
-	str2 = (char*)malloc(sizeof(*str2) * 9);
+	str2 = (char*)malloc(sizeof(*str2) * 10);
 	str3 = (char*)malloc(sizeof(*str3) * 20);
-	str4 = (char*)malloc(sizeof(*str4) * 9);
-	test = (char*)malloc(sizeof(*test) * 15);
-	strcpy(str, "Hello I am original");
-	strcpy(str2, "Yes I am");
-	strcpy(str3, "Hello I am original");
-	strcpy(str4, "Yes I am");
-	strcpy(test, "No you're not");
-	ft_memmove(str, test, 15);
-	ft_memmove(str2, str2 + 5, 10);
-	memmove(str3, test, 15);
-	memmove(str4, str4 + 5, 10);
+	str4 = (char*)malloc(sizeof(*str4) * 10);
+	test = (char*)malloc(sizeof(*test) * 14);
+	memcpy(str, "Hello I am original", 20);
+	memcpy(str2, "Yes I am", 9);
+	memcpy(str3, "Hello I am original", 20);
+	memcpy(str4, "Yes I am", 9);
+	memcpy(test, "No you're not", 14);
+	ft_memmove(str, test, 14);
+	ft_memmove(str2, str2 + 5, 4);
+	memmove(str3, test, 14);
+	memmove(str4, str4 + 5, 4);
 	ft_string_function_tester(str, str3);
 	ft_string_function_tester(str2, str4);
 	free(str);
@@ -359,10 +383,6 @@ void	ft_strlcat_tester(char *s1, char *s2)
 	char *str2;
 	char *str11;
 	char *str12;
-	char str3[50];
-	char str4[50];
-	char str13[50];
-	char str14[50];
 	char *str5;
 	char *str6;
 	char *str15;
@@ -376,13 +396,13 @@ void	ft_strlcat_tester(char *s1, char *s2)
 	char str19[10];
 	char str20[10];
 
-	str1 = (char*)malloc(sizeof(*str1) * (strlen(s1) + 1));
+	str1 = (char*)malloc(sizeof(*str1) * (strlen(s1) + strlen(s2) + 1));
 	str2 = (char*)malloc(sizeof(*str2) * (strlen(s2) + 1));
-	str5 = (char*)malloc(sizeof(*str5) * (strlen(s1) + 1));
+	str5 = (char*)malloc(sizeof(*str5) * (strlen(s1) + strlen(s2) + 1));
 	str6 = (char*)malloc(sizeof(*str6) * (strlen(s2) + 1));
-	str11 = (char*)malloc(sizeof(*str11) * (strlen(s1) + 1));
+	str11 = (char*)malloc(sizeof(*str11) * (strlen(s1) + strlen(s2) + 1));
 	str12 = (char*)malloc(sizeof(*str12) * (strlen(s2) + 1));
-	str15 = (char*)malloc(sizeof(*str15) * (strlen(s1) + 1));
+	str15 = (char*)malloc(sizeof(*str15) * (strlen(s1) + strlen(s2) + 1));
 	str16 = (char*)malloc(sizeof(*str16) * (strlen(s2) + 1));
 
 	yellow();
@@ -391,23 +411,17 @@ void	ft_strlcat_tester(char *s1, char *s2)
 	printf("Testing catenation with parameters:\n");
 	strcpy(str1, s1);
 	strcpy(str2, s2);
-	strcpy(str3, s1);
-	strcpy(str4, s2);
 	strcpy(str5, s1);
 	strcpy(str6, s2);
 	strcpy(str11, s1);
 	strcpy(str12, s2);
-	strcpy(str13, s1);
-	strcpy(str14, s2);
 	strcpy(str15, s1);
 	strcpy(str16, s2);
 	printf("Testing return values:\n");
 	ft_long_int_function_tester(ft_strlcat(str1, str2, sizeof(str1)), strlcat(str11, str12, sizeof(str11)));
-	ft_long_int_function_tester(ft_strlcat(str3, str4, sizeof(str3)), strlcat(str13, str14, sizeof(str13)));
 	ft_long_int_function_tester(ft_strlcat(str5, str6, sizeof(str5)), strlcat(str15, str16, sizeof(str15)));
 	printf("Testing catenated strings:\n");
 	ft_string_function_tester(str1, str11);
-	ft_string_function_tester(str3, str13);
 	ft_string_function_tester(str5, str15);
 	printf("Testing catenation with fixed length parameters with enough space:\n");
 	strcpy(str7, "Hello");
@@ -461,6 +475,12 @@ void	ft_memalloc_tester(size_t n)
 		printf("diff: KO\n%d\n", memcmp(str, str2, n));
 		printf("\033[0m");
 	}
+	if (ft_memalloc(4294967295) == NULL)
+		printf("OK");
+	else
+		printf("KO");
+	free(str);
+	free(str2);
 }
 void	ft_memdel_tester()
 {
@@ -476,8 +496,8 @@ void	ft_memdel_tester()
 	ft_default();
 	ft_memdel((void**)&str);
 	ft_memdel((void**)&tab);
-	ft_memory_function_tester(str, NULL);
-	ft_memory_function_tester(tab, NULL);
+	ft_memory_function_tester(str, NULL, 8);
+	ft_memory_function_tester(tab, NULL, 8);
 }
 
 void	ft_strdel_tester()
@@ -494,8 +514,8 @@ void	ft_strdel_tester()
 	ft_default();
 	ft_strdel(&str);
 	ft_strdel(&str2);
-	ft_memory_function_tester(str, NULL);
-	ft_memory_function_tester(str2, NULL);
+	ft_memory_function_tester(str, NULL, 8);
+	ft_memory_function_tester(str2, NULL, 8);
 }
 
 
@@ -519,17 +539,20 @@ void	ft_strclr_tester(void)
 		i++;
 	}
 	yellow();
-	printf("Test ft_strclr: Tests with three strings that are null terminated that nothing is printed out.\n");
+	printf("Test ft_strclr: Tests with three strings that are null terminated that there are just nulls.\n");
 	ft_default();
-	printf("%s\n", str[0]);
-	printf("%s\n", str[1]);
-	printf("%s\n", str[2]);
 	ft_strclr(str[0]);
 	ft_strclr(str[1]);
 	ft_strclr(str[2]);
-	printf("%s\n", str[0]);
-	printf("%s\n", str[1]);
-	printf("%s\n", str[2]);
+	ft_string_function_tester(str[0], "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+	ft_string_function_tester(str[1], "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+	ft_string_function_tester(str[2], "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+	ft_main_strdel(&str[0]);
+	ft_main_strdel(&str[1]);
+	ft_main_strdel(&str[2]);
+	ft_main_strdel(&str[3]);
+	free(str);
+	str = NULL;
 }
 
 void	ft_strnew_tester(size_t n)
@@ -537,7 +560,7 @@ void	ft_strnew_tester(size_t n)
 	void *str;
 	void *str2;
 
-	str = ft_memalloc(n);
+	str = ft_strnew(n);
 	str2 = (char*)malloc(sizeof(*str2) * (n + 1));
 	bzero(str2, n + 1);
 	yellow();
@@ -555,6 +578,8 @@ void	ft_strnew_tester(size_t n)
 		printf("diff: KO\n%d\n", memcmp(str, str2, n));
 		ft_default();
 	}
+	free(str);
+	free(str2);
 }
 
 void	ft_puts(char *s)
@@ -570,16 +595,26 @@ char	ft_toupper_char(char c)
 		return (c);
 }
 
-void	ft_rot_char(unsigned int i, char c)
+char	ft_rot_char(unsigned int i, char c)
 {
-	c = c + i;
-	write(1, &c, 1);
+	if (i == 0)
+	{
+		return (c - 32);
+	}
+	else
+		return (c);
 }
 
 void	ft_rot2_char(unsigned int i, char *c)
 {
-	*c = *c + i;
-	write(1, c, 1);
+	char	d;
+	if (i == 0)
+	{
+		d = c[i] - 32;
+		write(1, &d, 1);
+	}
+	else
+		write(1, &c[0], 1);
 }
 
 void	ft_striter_tester(char *s1, char *s2)
@@ -631,50 +666,54 @@ void	ft_putcha_test(char *s1, char *s2)
 	ft_putendl_fd(s2, 2);
 }
 
-
-
-void	ft_strmap_test(char *s1, char *s2)
+void	ft_strmap_test()
 {
+
+	char *s1_old;
+	char *s2_old;
 	char *s1_new;
 	char *s2_new;
 
-	s1_new = (char*)malloc(sizeof(*s1_new) * (ft_strlen(s1) + 1));
-	s2_new = (char*)malloc(sizeof(*s2_new) * (ft_strlen(s2) + 1));
+	s1_old = (char*)malloc(sizeof(*s1_new) * (17));
+	s2_old = (char*)malloc(sizeof(*s2_new) * (16));
+	ft_strcpy(s1_old, "i'm big capitals");
+	ft_strcpy(s2_old, "big as a humwee");
+	s1_new = ft_strmap(s1_old, ft_toupper_char);
+	s2_new = ft_strmap(s2_old, ft_toupper_char);
 	yellow();
-	printf("Test ft_strmap: Testing strmap by using ft_upper char version, and printing resulting string.\n");
+	printf("Test ft_strmap: Testing strmap by using ft_upper char version, and cmp resulting string.\n");
 	printf("\033[0m");
-	printf(":\n");
-	ft_strcpy(s1_new, ft_strmap(s1, ft_toupper_char));
-	ft_strcpy(s2_new, ft_strmap(s2, ft_toupper_char));
-	ft_putendl_fd(s1, 2);
-	ft_putendl_fd(s2, 2);
-	ft_putendl_fd(s1_new, 2);
-	ft_putendl_fd(s2_new, 2);
+	ft_string_function_tester(s1_new, "I'M BIG CAPITALS");
+	ft_string_function_tester(s2_new, "BIG AS A HUMWEE");
+	free(s1_old);
+	free(s2_old);
 	free(s1_new);
 	free(s2_new);
 }
 
-void	ft_strmapi_test(char *s1, char *s2)
+void	ft_strmapi_test()
 {
+
+	char *s1_old;
+	char *s2_old;
 	char *s1_new;
 	char *s2_new;
 
-	s1_new = (char*)malloc(sizeof(*s1_new) * (ft_strlen(s1) + 1));
-	s2_new = (char*)malloc(sizeof(*s2_new) * (ft_strlen(s2) + 1));
+	s1_old = (char*)malloc(sizeof(*s1_new) * (17));
+	s2_old = (char*)malloc(sizeof(*s2_new) * (16));
+	ft_strcpy(s1_old, "i'm big capitals");
+	ft_strcpy(s2_old, "big as a humwee");
+	s1_new = ft_strmapi(s1_old, ft_rot_char);
+	s2_new = ft_strmapi(s2_old, ft_rot_char);
 	yellow();
-	printf("Test ft_strmapi: Testing strmap by using ft_upper char version, and printing resulting string.\n");
+	printf("Test ft_strmapi: Testing strmap by using ft_upper char version, and cmp resulting string.\n");
 	printf("\033[0m");
-	printf(":\n");
-	ft_strcpy(s1_new, ft_strmapi(s1, (void*)ft_rot_char));
-	ft_strcpy(s2_new, ft_strmapi(s2, (void*)ft_rot_char));
-	ft_putendl_fd(s1, 2);
-	ft_putendl_fd(s2, 2);
-	ft_putendl_fd(s1_new, 2);
-	ft_putendl_fd(s2_new, 2);
+	ft_string_function_tester(s1_new, "I'm big capitals");
+	ft_string_function_tester(s2_new, "Big as a humwee");
+	free(s1_old);
+	free(s2_old);
 	free(s1_new);
 	free(s2_new);
-	s1_new = NULL;
-	s2_new = NULL;
 }
 
 void	ft_strequ_tester()
@@ -713,12 +752,17 @@ void	ft_strnequ_tester()
 
 void	ft_strsub_tester()
 {
+	char str[31];
+	char str2[13];
+
+	strcpy(str, "Cut off this part Hello World!");
+	strcpy(str2, "Hello World!");
 	yellow();
 	printf("Test ft_strsub: Testing by giving it string literals and comparing those.\n");
 	printf("\033[0m");
 	printf(":\n");
 	ft_putendl_fd("test with 'Cut off this part Hello World!'.", 1);
-	ft_string_function_tester(ft_strsub("Cut off this part Hello World!", 18, 12), "Hello World!");
+	ft_string_function_tester(ft_strsub(str, 18, 12), str2);
 	printf(":\n");
 }
 
@@ -749,32 +793,57 @@ void	ft_strtrim_tester(char *s1, char *s2)
 	ft_putendl_fd(ft_strjoin(s1, s2), 1);
 }
 
-void	ft_strsplit_tester(char *s1, char *s2)
+void	ft_strsplit_tester()
 {
+	char **arr_str0;
+	char **arr_str1;
+	char **arr_str2;
+	char **arr_str3;
+
+	arr_str0 = ft_strsplit("     Marvin    rules     ", ' ');
+	arr_str1 = ft_strsplit("     Coffee  breaks are for weak.", ' ');
+	arr_str2 = ft_strsplit("%%%%%%Galaxy is%%%%for%%%%all.", '%');
+	arr_str3 = ft_strsplit("%%%%%%%%%%%%%%%%%%%%%%%%", '%');
 	yellow();
 	printf("Test ft_strsplit: Testing it by giving it few string literals and comparing those.\n");
 	printf("\033[0m");
 	printf(":\n");
-	ft_putendl_fd("test with '    Hello     ' and '     Hel    lo     '.", 1);
-	ft_string_function_tester(ft_strsplit("    Hello     ", ' ')[0], "Hello");
-	ft_string_function_tester(ft_strsplit("     Hel    lo     ", ' ')[1], "lo");
-	ft_string_function_tester(ft_strsplit("     Marvin    rules     ", ' ')[1], "rules");
-	ft_string_function_tester(ft_strsplit("     Coffee  breaks are for weak.", ' ')[1], "breaks");
-	ft_string_function_tester(ft_strsplit("%%%%%%Galaxy is%%%%for%%%%all.", '%')[0], "Galaxy is");
-	printf("<\n");
-	ft_putendl_fd("test with parameters.", 1);
-	ft_putendl_fd(ft_strjoin(s1, s2), 1);
+	ft_string_function_tester(arr_str0[0], "Marvin");
+	ft_string_function_tester(arr_str0[1], "rules");
+	ft_string_function_tester(arr_str0[2], NULL);
+	ft_string_function_tester(arr_str1[1], "breaks");
+	ft_string_function_tester(arr_str2[0], "Galaxy is");
+	ft_string_function_tester(arr_str3[0], NULL);
+	ft_main_strarrdel(arr_str0, 3);
+	ft_main_strarrdel(arr_str1, 6);
+	ft_main_strarrdel(arr_str2, 4);
+	ft_main_strarrdel(arr_str3, 1);
 }
 
 void	ft_itoa_tester()
 {
+	char *str1;
+	char *str2;
+	char *str3;
+	char *str4;
+
+	str1 = ft_itoa(12345);
+	str2 = ft_itoa(-12345);
+	str3 = ft_itoa(-2147483648);
+	str4 = ft_itoa(123456000);
 	yellow();
 	printf("Test ft_itoa: Testing it by giving it few integrals and printf:ing those.\n");
 	printf("\033[0m");
 	printf(":\n");
 	ft_putendl_fd("test with '12345' and '-12345'.", 1);
-	ft_string_function_tester(ft_itoa(12345), "12345");
-	ft_string_function_tester(ft_itoa(-12345), "-12345");
+	ft_string_function_tester(str1, "12345");
+	ft_string_function_tester(str2, "-12345");
+	ft_string_function_tester(str3, "-2147483648");
+	ft_string_function_tester(str4, "123456000");
+	ft_main_strdel(&str1);
+	ft_main_strdel(&str2);
+	ft_main_strdel(&str3);
+	ft_main_strdel(&str4);
 	printf("<\n");
 }
 
@@ -850,8 +919,8 @@ void	ft_memset_test()
 	strcpy(str3,"Hello it's me.");
 	strcpy(str4,"Hello it's me.");
 	printf("ft_memset: fills the first n bytes with constant byte c. Returns pointer.\n");
-	ft_memory_function_tester(ft_memset(str1, '$', 5), memset(str2, '$', 5));
-	ft_memory_function_tester(ft_memset(str3, '$', 15), memset(str4, '$', 15));
+	ft_memory_function_tester(ft_memset(str1, '$', 5), memset(str2, '$', 5), 15);
+	ft_memory_function_tester(ft_memset(str3, '$', 15), memset(str4, '$', 15), 15);
 	free(str1);
 	free(str2);
 	free(str3);
@@ -872,7 +941,7 @@ void	ft_bzero_test()
 	strcpy(str2, "Hello.");
 	ft_bzero(str, 7);
 	bzero(str2, 7);
-	ft_memory_function_tester(str, str2);
+	ft_memory_function_tester(str, str2, 7);
 	free(str);
 	free(str2);
 }
@@ -888,7 +957,7 @@ void	ft_memcpy_test()
 	yellow();
 	printf("ft_memcpy: copies n bytes from src to dest. Returns a pointer to dest.\n");
 	printf("\033[0m");
-	ft_memory_function_tester(ft_memcpy(str, "hello", 7), memcpy(str2, "hello", 7));
+	ft_memory_function_tester(ft_memcpy(str, "hello", 7), memcpy(str2, "hello", 7), 7);
 	free(str);
 	free(str2);
 }
@@ -900,26 +969,29 @@ void	ft_memccpy_test()
 	char *str2;
 	char *str3;
 	char *str4;
-	char *cpstr = "This is a string: not copied.";
+	char *cpstr;
 
 	str = (char*)malloc(sizeof(*str) * 30);
 	str2 = (char*)malloc(sizeof(*str2) * 30);
 	str3 = (char*)malloc(sizeof(*str3) * 12);
 	str4 = (char*)malloc(sizeof(*str4) * 12);
-	ft_strcpy(str3, "laaelectric");
-	ft_strcpy(str4, "laaelectric");
+	cpstr = (char*)malloc(sizeof(*cpstr) * 30);
+	strcpy(str3, "laaelectric");
+	strcpy(str4, "laaelectric");
+	strcpy(cpstr, "This is a string: not copied.");
 	yellow();
 	printf("ft_memccpy: copies n bytes from src to dest. Returns a pointer to dest + i if c is found.\n");
 	printf("\033[0m");
 	ft_memccpy(str, cpstr, ':', 30);
 	memccpy(str2,  cpstr, ':', 30);
-	ft_string_function_tester(str, str2);
+	ft_memory_function_tester(str, str2, 15);
 	free(str);
 	free(str2);
 	ft_putendl("If electric is printed, first part of the string was correctly copied.");
-	ft_memory_function_tester(ft_memccpy(str3, "eel", 'l', 3), memccpy(str4, "eel", 'l', 3));
+	ft_memory_function_tester(ft_memccpy(str3, "eel", 'l', 3), memccpy(str4, "eel", 'l', 3), 9);
 	free(str3);
 	free(str4);
+	free(cpstr);
 }
 
 void	ft_strlen_test(char *s1, char *s2)
@@ -945,10 +1017,6 @@ void	ft_strdup_test(char *s1, char *s2)
 	char *str3;
 	char *str4;
 
-	str = (char*)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
-	str2 = (char*)malloc(sizeof(*s2) * (ft_strlen(s2) + 1));
-	str3 = (char*)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
-	str4 = (char*)malloc(sizeof(*s2) * (ft_strlen(s2) + 1));
 	yellow();
 	printf("ft_strdup: returns a pointer to a new string which is duplicate of given params.\n");
 	printf("\033[0m");
@@ -1093,79 +1161,211 @@ void	ft_strcmp_test(char *s1, char *s2)
 	printf("\033[0m");
 	ft_cmp_function_tester(ft_strcmp(s1, str), strcmp(s1, str));
 	ft_cmp_function_tester(ft_strcmp(s2, str2), strcmp(s2, str2));
+	ft_cmp_function_tester(ft_strcmp("", ""), strcmp("", ""));
+	ft_cmp_function_tester(ft_strcmp("\212", "\0"), strcmp("\212", "\0"));
+	ft_cmp_function_tester(ft_strcmp("a", "abc"), strcmp("a", "abc"));
 	yellow();
 	printf("ft_strncmp: Compared two params until half of the length of param. Result was: \n");
 	printf("\033[0m");
 	ft_cmp_function_tester(ft_strncmp(s1, str, ft_strlen(str) / 2), strncmp(s1, str, ft_strlen(str) / 2));
 	ft_cmp_function_tester(ft_strncmp(s2, str2, ft_strlen(str2) / 2), strncmp(s2, str2, ft_strlen(str) / 2));
-	ft_cmp_function_tester(ft_strncmp("aaaaaa", "aaaaaaaaaa", 5), strncmp("aaaaaa", "aaaaaaaaaa", 5));
-	ft_cmp_function_tester(ft_strncmp("aaaaab", "aaaaaaaaaa", 5), strncmp("aaaaab", "aaaaaaaaaa", 5));
-	ft_cmp_function_tester(ft_strncmp("baaaab", "aaaaaaaaaa", 5), strncmp("baaaab", "aaaaaaaaaa", 5));
-	ft_cmp_function_tester(ft_strncmp("aacaab", "aaaaaaaaaa", 3), strncmp("aacaab", "aaaaaaaaaa", 3));
-	ft_cmp_function_tester(ft_strncmp("axcaab", "aaaaaaaaaa", 3), strncmp("axcaab", "aaaaaaaaaa", 3));
+	ft_cmp_function_tester(ft_strncmp("\212", "\0", 1), strncmp("\212", "\0", 1));
+	ft_cmp_function_tester(ft_strncmp("abc", "abcde", 3), strncmp("abc", "abcde", 3));
+	ft_cmp_function_tester(ft_strncmp("abc", "abc\0de", 30), strncmp("abc", "abc\0de", 30));
+	ft_cmp_function_tester(ft_strncmp("abc", "abb\0de", 30), strncmp("abc", "abb\0de", 30));
+	ft_cmp_function_tester(ft_strncmp("4", "2", 0), strncmp("4", "2", 0));
+	ft_main_strdel(&str);
+	ft_main_strdel(&str2);
 }
 
 void	ft_atoi_test(char *s1, char *s2)
 {
+	yellow();
 	printf("ft_atoi: Stripped strings to an integer. Results were: \n");
+	ft_default();
 	ft_int_function_tester(ft_atoi(s1), atoi(s2));
 	ft_int_function_tester(ft_atoi(s1), atoi(s2));
 	ft_int_function_tester(ft_atoi("38713813138aaaa"), atoi("38713813138aaaa"));
 	ft_int_function_tester(ft_atoi("-387138aaaa"), atoi("-387138aaaa"));
+	ft_int_function_tester(ft_atoi("aaa22"), atoi("aaa22"));
 	ft_int_function_tester(ft_atoi("- 42"), atoi("- 42"));
+	ft_int_function_tester(ft_atoi("+42"), atoi("+42"));
+	ft_int_function_tester(ft_atoi("++42"), atoi("++42"));
+	ft_int_function_tester(ft_atoi(" -sasdadsf"), atoi(" -sasdadsf"));
+	ft_int_function_tester(ft_atoi(""), atoi(""));
+	ft_int_function_tester(ft_atoi("+007"), atoi("+007"));
+	ft_int_function_tester(ft_atoi("--66"), atoi("--66"));
+	ft_int_function_tester(ft_atoi("-42"), atoi("-42"));
+	ft_int_function_tester(ft_atoi("--42"), atoi("--42"));
+	ft_int_function_tester(ft_atoi("0120223"), atoi("0120223"));
+	ft_int_function_tester(ft_atoi("000000000000000110"), atoi("000000000000000110"));
+	ft_int_function_tester(ft_atoi(" 1"), atoi(" 1"));
+	ft_int_function_tester(ft_atoi(" 21 "), atoi(" 21 "));
+	ft_int_function_tester(ft_atoi("42jk "), atoi("42jk "));
+	ft_int_function_tester(ft_atoi("\n42"), atoi("\n42"));
+	ft_int_function_tester(ft_atoi("1-2"), atoi("1-2"));
+	ft_int_function_tester(ft_atoi("4+2"), atoi("4+2"));
+	ft_int_function_tester(ft_atoi("  +42"), atoi("  +42"));
+	ft_int_function_tester(ft_atoi("  -42"), atoi("  -42"));
+	ft_int_function_tester(ft_atoi("4,5"), atoi("4,5"));
+	ft_int_function_tester(ft_atoi("+"), atoi("+"));
+	ft_int_function_tester(ft_atoi("-"), atoi("-"));
+	ft_int_function_tester(ft_atoi("-+1"), atoi("-+1"));
+	ft_int_function_tester(ft_atoi("+-1"), atoi("+-1"));
+	ft_int_function_tester(ft_atoi("\200123"), atoi("\200123"));
+	ft_int_function_tester(ft_atoi("123\200"), atoi("123\200"));
+	ft_int_function_tester(ft_atoi("  \t\n  \r\r\v\f-899"), atoi("  \t\n  \r\r\v\f-899"));
+	ft_int_function_tester(ft_atoi("-2147483648"), atoi("-2147483648"));
+	ft_int_function_tester(ft_atoi("2147483647"), atoi("2147483647"));
 }
 
 void	ft_is_test()
 {
 		printf("ft_isalpha: Validates that unsigned char is part of alphabet. Results were: \n");
-		ft_int_function_tester(ft_isalpha('a'), isalpha('a'));
-		ft_int_function_tester(ft_isalpha('H'), isalpha('H'));
-		ft_int_function_tester(ft_isalpha('!'), isalpha('!'));
+		ft_int_function_tester(ft_isalpha((unsigned char)('0')), isalpha((unsigned char)('0')));
+		ft_int_function_tester(ft_isalpha((unsigned char)('a')), isalpha((unsigned char)('a')));
+		ft_int_function_tester(ft_isalpha((unsigned char)('a' + 0X100)), isalpha((unsigned char)('a' + 0X100)));
+		ft_int_function_tester(ft_isalpha((unsigned char)('Z')), isalpha((unsigned char)('Z')));
+		ft_int_function_tester(ft_isalpha((unsigned char)('!')), isalpha((unsigned char)('!')));
+		ft_int_function_tester(ft_isalpha((unsigned char)(' ')), isalpha((unsigned char)(' ')));
+		ft_int_function_tester(ft_isalpha((unsigned char)(9999)), isalpha((unsigned char)(9999)));
+		ft_int_function_tester(ft_isalpha((unsigned char)('\t')), isalpha((unsigned char)('\t')));
+		ft_int_function_tester(ft_isalpha((unsigned char)('\n')), isalpha((unsigned char)('\n')));
+		ft_int_function_tester(ft_isalpha((unsigned char)('\b')), isalpha((unsigned char)('\b')));
+		ft_int_function_tester(ft_isalpha((unsigned char)('\v')), isalpha((unsigned char)('\v')));
+		ft_int_function_tester(ft_isalpha((unsigned char)(0)), isalpha((unsigned char)(0)));
+		ft_int_function_tester(ft_isalpha((unsigned char)(1)), isalpha((unsigned char)(1)));
+		ft_int_function_tester(ft_isalpha((unsigned char)(5)), isalpha((unsigned char)(5)));
+		ft_int_function_tester(ft_isalpha((unsigned char)('%')), isalpha((unsigned char)('%')));
+		ft_int_function_tester(ft_isalpha((unsigned char)(-20)), isalpha((unsigned char)(-20)));
 		printf("ft_isdigit: Validates that integer is part of digits. Results were: \n");
-		ft_int_function_tester(ft_isdigit('0'), isdigit('0'));
-		ft_int_function_tester(ft_isdigit('1'), isdigit('1'));
-		ft_int_function_tester(ft_isdigit('2'), isdigit('2'));
-		ft_int_function_tester(ft_isdigit('3'), isdigit('3'));
-		ft_int_function_tester(ft_isdigit('!'), isdigit('!'));
+		ft_int_function_tester(ft_isdigit((unsigned char)('0')), isdigit((unsigned char)('0')));
+		ft_int_function_tester(ft_isdigit((unsigned char)('a')), isdigit((unsigned char)('a')));
+		ft_int_function_tester(ft_isdigit((unsigned char)('a' + 0X100)), isdigit((unsigned char)('a' + 0X100)));
+		ft_int_function_tester(ft_isdigit((unsigned char)('Z')), isdigit((unsigned char)('Z')));
+		ft_int_function_tester(ft_isdigit((unsigned char)('!')), isdigit((unsigned char)('!')));
+		ft_int_function_tester(ft_isdigit((unsigned char)(' ')), isdigit((unsigned char)(' ')));
+		ft_int_function_tester(ft_isdigit((unsigned char)(9999)), isdigit((unsigned char)(9999)));
+		ft_int_function_tester(ft_isdigit((unsigned char)('\t')), isdigit((unsigned char)('\t')));
+		ft_int_function_tester(ft_isdigit((unsigned char)('\n')), isdigit((unsigned char)('\n')));
+		ft_int_function_tester(ft_isdigit((unsigned char)('\b')), isdigit((unsigned char)('\b')));
+		ft_int_function_tester(ft_isdigit((unsigned char)('\v')), isdigit((unsigned char)('\v')));
+		ft_int_function_tester(ft_isdigit((unsigned char)(0)), isdigit((unsigned char)(0)));
+		ft_int_function_tester(ft_isdigit((unsigned char)(1)), isdigit((unsigned char)(1)));
+		ft_int_function_tester(ft_isdigit((unsigned char)(5)), isdigit((unsigned char)(5)));
+		ft_int_function_tester(ft_isdigit((unsigned char)('%')), isdigit((unsigned char)('%')));
+		ft_int_function_tester(ft_isdigit((unsigned char)(-20)), isdigit((unsigned char)(-20)));
 		printf("ft_isalnum: Validates that tested value is part of alphabet or digits. Results were: \n");
 		ft_int_function_tester(ft_isalnum((unsigned char)('0')), isalnum((unsigned char)('0')));
 		ft_int_function_tester(ft_isalnum((unsigned char)('a')), isalnum((unsigned char)('a')));
-		ft_int_function_tester(ft_isalnum((unsigned char)('n')), isalnum((unsigned char)('n')));
-		ft_int_function_tester(ft_isalnum((unsigned char)('u')), isalnum((unsigned char)('u')));
+		ft_int_function_tester(ft_isalnum((unsigned char)('a' + 0X100)), isalnum((unsigned char)('a' + 0X100)));
+		ft_int_function_tester(ft_isalnum((unsigned char)('Z')), isalnum((unsigned char)('Z')));
 		ft_int_function_tester(ft_isalnum((unsigned char)('!')), isalnum((unsigned char)('!')));
+		ft_int_function_tester(ft_isalnum((unsigned char)(' ')), isalnum((unsigned char)(' ')));
+		ft_int_function_tester(ft_isalnum((unsigned char)(9999)), isalnum((unsigned char)(9999)));
+		ft_int_function_tester(ft_isalnum((unsigned char)('\t')), isalnum((unsigned char)('\t')));
+		ft_int_function_tester(ft_isalnum((unsigned char)('\n')), isalnum((unsigned char)('\n')));
+		ft_int_function_tester(ft_isalnum((unsigned char)('\b')), isalnum((unsigned char)('\b')));
+		ft_int_function_tester(ft_isalnum((unsigned char)('\v')), isalnum((unsigned char)('\v')));
+		ft_int_function_tester(ft_isalnum((unsigned char)(0)), isalnum((unsigned char)(0)));
+		ft_int_function_tester(ft_isalnum((unsigned char)(1)), isalnum((unsigned char)(1)));
+		ft_int_function_tester(ft_isalnum((unsigned char)(5)), isalnum((unsigned char)(5)));
+		ft_int_function_tester(ft_isalnum((unsigned char)('%')), isalnum((unsigned char)('%')));
+		ft_int_function_tester(ft_isalnum((unsigned char)(-20)), isalnum((unsigned char)(-20)));
 		printf("ft_isascii: Validates that tested value is an ascii character. Results were: \n");
 		ft_int_function_tester(ft_isascii((unsigned char)('0')), isascii((unsigned char)('0')));
 		ft_int_function_tester(ft_isascii((unsigned char)('a')), isascii((unsigned char)('a')));
-		ft_int_function_tester(ft_isascii((unsigned char)('n')), isascii((unsigned char)('n')));
-		ft_int_function_tester(ft_isascii((unsigned char)(126)), isascii((unsigned char)(126)));
-		ft_int_function_tester(ft_isascii((unsigned char)(184)), isascii((unsigned char)(184)));
-		ft_int_function_tester(ft_isascii((unsigned char)(255)), isascii((unsigned char)(255)));
-		ft_int_function_tester(ft_isascii((unsigned char)(127)), isascii((unsigned char)(127)));
+		ft_int_function_tester(ft_isascii((unsigned char)('a' + 0X100)), isascii((unsigned char)('a' + 0X100)));
+		ft_int_function_tester(ft_isascii((unsigned char)('Z')), isascii((unsigned char)('Z')));
+		ft_int_function_tester(ft_isascii((unsigned char)('!')), isascii((unsigned char)('!')));
+		ft_int_function_tester(ft_isascii((unsigned char)(' ')), isascii((unsigned char)(' ')));
+		ft_int_function_tester(ft_isascii((unsigned char)(9999)), isascii((unsigned char)(9999)));
+		ft_int_function_tester(ft_isascii((unsigned char)('\t')), isascii((unsigned char)('\t')));
+		ft_int_function_tester(ft_isascii((unsigned char)('\n')), isascii((unsigned char)('\n')));
+		ft_int_function_tester(ft_isascii((unsigned char)('\b')), isascii((unsigned char)('\b')));
+		ft_int_function_tester(ft_isascii((unsigned char)('\v')), isascii((unsigned char)('\v')));
+		ft_int_function_tester(ft_isascii((unsigned char)(0)), isascii((unsigned char)(0)));
+		ft_int_function_tester(ft_isascii((unsigned char)(1)), isascii((unsigned char)(1)));
+		ft_int_function_tester(ft_isascii((unsigned char)(5)), isascii((unsigned char)(5)));
+		ft_int_function_tester(ft_isascii((unsigned char)('%')), isascii((unsigned char)('%')));
+		ft_int_function_tester(ft_isascii((unsigned char)(-20)), isascii((unsigned char)(-20)));
 		printf("ft_isprint: Validates that tested value is a printable character. Results were: \n");
-		ft_int_function_tester(ft_isprint((unsigned char)(1)), isprint((unsigned char)(1)));
-		ft_int_function_tester(ft_isprint((unsigned char)(20)), isprint((unsigned char)(20)));
+		ft_int_function_tester(ft_isprint((unsigned char)('0')), isprint((unsigned char)('0')));
 		ft_int_function_tester(ft_isprint((unsigned char)('a')), isprint((unsigned char)('a')));
-		ft_int_function_tester(ft_isprint((unsigned char)('n')), isprint((unsigned char)('n')));
-		ft_int_function_tester(ft_isprint((unsigned char)(127)), isprint((unsigned char)(127)));
-		ft_int_function_tester(ft_isprint((unsigned char)(184)), isprint((unsigned char)(184)));
-		ft_int_function_tester(ft_isprint((unsigned char)(255)), isprint((unsigned char)(255)));
-		ft_int_function_tester(ft_isprint((unsigned char)(127)), isprint((unsigned char)(127)));
+		ft_int_function_tester(ft_isprint((unsigned char)('a' + 0X100)), isprint((unsigned char)('a' + 0X100)));
+		ft_int_function_tester(ft_isprint((unsigned char)('Z')), isprint((unsigned char)('Z')));
+		ft_int_function_tester(ft_isprint((unsigned char)('!')), isprint((unsigned char)('!')));
+		ft_int_function_tester(ft_isprint((unsigned char)(' ')), isprint((unsigned char)(' ')));
+		ft_int_function_tester(ft_isprint((unsigned char)(9999)), isprint((unsigned char)(9999)));
+		ft_int_function_tester(ft_isprint((unsigned char)('\t')), isprint((unsigned char)('\t')));
+		ft_int_function_tester(ft_isprint((unsigned char)('\n')), isprint((unsigned char)('\n')));
+		ft_int_function_tester(ft_isprint((unsigned char)('\b')), isprint((unsigned char)('\b')));
+		ft_int_function_tester(ft_isprint((unsigned char)('\v')), isprint((unsigned char)('\v')));
+		ft_int_function_tester(ft_isprint((unsigned char)(0)), isprint((unsigned char)(0)));
+		ft_int_function_tester(ft_isprint((unsigned char)(1)), isprint((unsigned char)(1)));
+		ft_int_function_tester(ft_isprint((unsigned char)(5)), isprint((unsigned char)(5)));
+		ft_int_function_tester(ft_isprint((unsigned char)('%')), isprint((unsigned char)('%')));
+		ft_int_function_tester(ft_isprint((unsigned char)(-20)), isprint((unsigned char)(-20)));
 		printf("ft_toupper: Changes char to uppercase: \n");
-		ft_int_function_tester(ft_toupper((unsigned char)(1)), tolower((unsigned char)(1)));
+		ft_int_function_tester(ft_toupper((unsigned char)('0')), toupper((unsigned char)('0')));
 		ft_int_function_tester(ft_toupper((unsigned char)('a')), toupper((unsigned char)('a')));
-		ft_int_function_tester(ft_toupper((unsigned char)('z')), toupper((unsigned char)('z')));
-		ft_int_function_tester(ft_toupper((unsigned char)('h')), toupper((unsigned char)('h')));
-		ft_int_function_tester(ft_toupper((unsigned char)('A')), toupper((unsigned char)('A')));
-		ft_int_function_tester(ft_toupper((unsigned char)('B')), toupper((unsigned char)('B')));
-		ft_int_function_tester(ft_toupper((unsigned char)(127)), toupper((unsigned char)(127)));
+		ft_int_function_tester(ft_toupper((unsigned char)('a' + 0X100)), toupper((unsigned char)('a' + 0X100)));
+		ft_int_function_tester(ft_toupper((unsigned char)('Z')), toupper((unsigned char)('Z')));
+		ft_int_function_tester(ft_toupper((unsigned char)('!')), toupper((unsigned char)('!')));
+		ft_int_function_tester(ft_toupper((unsigned char)(' ')), toupper((unsigned char)(' ')));
+		ft_int_function_tester(ft_toupper((unsigned char)(9999)), toupper((unsigned char)(9999)));
+		ft_int_function_tester(ft_toupper((unsigned char)('\t')), toupper((unsigned char)('\t')));
+		ft_int_function_tester(ft_toupper((unsigned char)('\n')), toupper((unsigned char)('\n')));
+		ft_int_function_tester(ft_toupper((unsigned char)('\b')), toupper((unsigned char)('\b')));
+		ft_int_function_tester(ft_toupper((unsigned char)('\v')), toupper((unsigned char)('\v')));
+		ft_int_function_tester(ft_toupper((unsigned char)(0)), toupper((unsigned char)(0)));
+		ft_int_function_tester(ft_toupper((unsigned char)(1)), toupper((unsigned char)(1)));
+		ft_int_function_tester(ft_toupper((unsigned char)(5)), toupper((unsigned char)(5)));
+		ft_int_function_tester(ft_toupper((unsigned char)('%')), toupper((unsigned char)('%')));
+		ft_int_function_tester(ft_toupper((unsigned char)(-20)), toupper((unsigned char)(-20)));
 		printf("ft_tolower: Changes char to lowercase: \n");
-		ft_int_function_tester(ft_tolower((unsigned char)(1)), tolower((unsigned char)(1)));
+		ft_int_function_tester(ft_tolower((unsigned char)('0')), tolower((unsigned char)('0')));
 		ft_int_function_tester(ft_tolower((unsigned char)('a')), tolower((unsigned char)('a')));
-		ft_int_function_tester(ft_tolower((unsigned char)('n')), tolower((unsigned char)('n')));
-		ft_int_function_tester(ft_tolower((unsigned char)('H')), tolower((unsigned char)('H')));
-		ft_int_function_tester(ft_tolower((unsigned char)('C')), tolower((unsigned char)('C')));
+		ft_int_function_tester(ft_tolower((unsigned char)('a' + 0X100)), tolower((unsigned char)('a' + 0X100)));
 		ft_int_function_tester(ft_tolower((unsigned char)('Z')), tolower((unsigned char)('Z')));
-		ft_int_function_tester(ft_tolower((unsigned char)(127)), tolower((unsigned char)(127)));
+		ft_int_function_tester(ft_tolower((unsigned char)('!')), tolower((unsigned char)('!')));
+		ft_int_function_tester(ft_tolower((unsigned char)(' ')), tolower((unsigned char)(' ')));
+		ft_int_function_tester(ft_tolower((unsigned char)(9999)), tolower((unsigned char)(9999)));
+		ft_int_function_tester(ft_tolower((unsigned char)('\t')), tolower((unsigned char)('\t')));
+		ft_int_function_tester(ft_tolower((unsigned char)('\n')), tolower((unsigned char)('\n')));
+		ft_int_function_tester(ft_tolower((unsigned char)('\b')), tolower((unsigned char)('\b')));
+		ft_int_function_tester(ft_tolower((unsigned char)('\v')), tolower((unsigned char)('\v')));
+		ft_int_function_tester(ft_tolower((unsigned char)(0)), tolower((unsigned char)(0)));
+		ft_int_function_tester(ft_tolower((unsigned char)(1)), tolower((unsigned char)(1)));
+		ft_int_function_tester(ft_tolower((unsigned char)(5)), tolower((unsigned char)(5)));
+		ft_int_function_tester(ft_tolower((unsigned char)('%')), tolower((unsigned char)('%')));
+		ft_int_function_tester(ft_tolower((unsigned char)(-20)), tolower((unsigned char)(-20)));
+}
+
+
+void		ft_del_test(void *data, size_t i)
+{
+	if (data)
+	{
+		printf("%ld\n", i);
+		ft_memdel(&data);
+		write(1, "Del OK.\n", 8);
+
+	}
+}
+
+void	ft_main_list_clearer(t_list **alst)
+{
+	t_list *item;
+
+	while (*alst != NULL)
+	{
+		item = *alst;
+		*alst = item->next;
+		ft_del_test(item->content, item->content_size);
+		free(item);
+		item = NULL;
+	}
 }
 
 void	ft_lstadd_test()
@@ -1175,25 +1375,28 @@ void	ft_lstadd_test()
 	char		*str;
 	char		*str2;
 
-	str = (char*)malloc(sizeof(*str) * 14);
-	str = strcpy(str, "Hello Marvin.");
-	str2 = (char*)malloc(sizeof(*str) * 14);
-	str2 = strcpy(str2, "You are sad..");
+	str = strdup("Hello Marvin.");
+	str2 = strdup("You are sad..");
 	yellow();
 	printf("ft_lstadd: Added new element to list. Result was: \n");
 	printf("\033[0m");
 	list = ft_lstnew(str, sizeof(*str) * 14);
 	second = ft_lstnew(str2, sizeof(*str2) * 14);
 	ft_lstadd(&list, second);
-	if (strcmp((char*)list->content, "You are sad..") == 0)
+	if (strcmp((char*)list->content, "You are sad..") == 0 &&
+		strcmp((char*)list->next->content, "Hello Marvin.") == 0)
 		printf("OK: Node added to the begin of the list.\n");
 	else
 		printf("KO: Node adding failed to begin %s\n", (char*)list->content);
+	ft_main_list_clearer(&list);
+	free(str);
+	free(str2);
 }
 
 void	ft_lstnew_test()
 {
 	t_list		*list;
+	t_list		*list2;
 	char		*str;
 
 	str = (char*)malloc(sizeof(*str) * 14);
@@ -1206,18 +1409,14 @@ void	ft_lstnew_test()
 		printf("OK: Content added successfully.\n");
 	else
 		printf("KO: Content adding failed.\n");
-	list = ft_lstnew(NULL, 86);
-	if (list->content_size == 0)
+	list2 = ft_lstnew(NULL, 86);
+	if (list2->content_size == 0)
 		printf("OK: NULL pointer handled successfully.\n");
 	else
 		printf("KO: NULL pointer returned not null.\n");
-}
-
-void		ft_del_test(void *data, size_t i)
-{
-	write(1, "Del OK: ", 8);
-	write(1, (char*)data, i);
-	write(1, "\n", 1);
+	ft_main_list_clearer(&list);
+	ft_main_list_clearer(&list2);
+	free(str);
 }
 
 void		ft_lstdelone_test()
@@ -1228,16 +1427,25 @@ void		ft_lstdelone_test()
 	yellow();
 	printf("ft_lstdelone: Tested deleting one item in a list. Result was: \n");
 	printf("\033[0m");
-	str = (char*)malloc(sizeof(*str) * 6);
-	str = strcpy(str, "hello");
-	list = (t_list*)malloc(sizeof(t_list));
-	list->content = str;
-	list->content_size = sizeof(str) * 6;
+	str = strdup("hello");
+	list = ft_lstnew((void*)str, sizeof(*str));
 	ft_lstdelone(&list, ft_del_test);
 	if (list == NULL)
 		printf("OK: List is now set to NULL.\n");
 	else
 		printf("KO: List is not set to NULL.\n");
+	free(str);
+}
+
+void		ft_mainlstadd(t_list **alst, t_list *new)
+{
+	if (new == NULL)
+		return ;
+	if (*alst != NULL)
+	{
+		new->next = *alst;
+		*alst = new;
+	}
 }
 
 void		ft_lstdel_test(void)
@@ -1245,36 +1453,23 @@ void		ft_lstdel_test(void)
 	t_list	*list;
 	t_list	*second;
 	t_list	*third;
-	char	*str1;
-	char	*str2;
-	char	*str3;
+	char	*str;
 
 	yellow();
 	printf("ft_lstdel: Tested deleting all items in a list. Result was: \n");
 	printf("\033[0m");
-	str1 = (char*)malloc(sizeof(*str1) * 6);
-	str1 = strcpy(str1, "hello");
-	str2 = (char*)malloc(sizeof(*str2) * 6);
-	str2 = strcpy(str2, "hello");
-	str3 = (char*)malloc(sizeof(*str3) * 6);
-	str3 = strcpy(str3, "hello");
-	list = (t_list *)malloc(sizeof(t_list));
-	second = (t_list *)malloc(sizeof(t_list));
-	third = (t_list *)malloc(sizeof(t_list));
-	list->content = str1;
-	list->content_size = sizeof(*str1) * 6;
-	list->next = second;
-	second->content = str2;
-	second->content_size = sizeof(*str2) * 6;
-	second->next = third;
-	third->content = str3;
-	third->content_size = sizeof(*str3) * 6;
-	third->next = NULL;
+	str = strdup("hello");
+	list = ft_lstnew(str, sizeof(*str));
+	second = ft_lstnew(str, sizeof(*str));
+	third = ft_lstnew(str, sizeof(*str));
+	ft_mainlstadd(&list, second);
+	ft_mainlstadd(&list, third);
 	ft_lstdel(&list, ft_del_test);
 	if (list == NULL)
 		printf("OK: List is now set to NULL.\n");
 	else
 		printf("KO: List is not set to NULL.\n");
+	free(str);
 }
 
 void	ft_lstiter_function(t_list *elem)
@@ -1297,17 +1492,63 @@ void	ft_printsize_function(t_list *elem)
 	printf("%ld\n", temp->content_size);
 }
 
-t_list	*ft_lstmap_function(t_list *elem)
+t_list		*ft_lstmap_function(t_list *elem)
 {
-	t_list	*map;
+	t_list	*new;
 
-	map = (t_list*)malloc(sizeof(*map));
-	bzero(map, sizeof(t_list));
-	map->content = (void*)malloc(sizeof(elem->content_size));
-	map->content_size = elem->content_size;
-	map->content = elem->content;
-	return (map);
+	new = (t_list*)malloc(sizeof(*new));
+	if (new != NULL)
+	{
+		if (elem->content != NULL)
+		{
+			new->content = (void*)malloc(elem->content_size);
+			if (new->content != NULL)
+			{
+				new->content = ft_memcpy(new->content, elem->content, elem->content_size);
+				new->content_size = elem->content_size;
+			}
+		}
+		else
+		{
+			new->content = NULL;
+			new->content_size = 0;
+		}
+		new->next = NULL;
+		return (new);
+	}
+	free(new);
+	new = NULL;
+	return (new);
 }
+
+/*t_list  *lstmap_test_fn(t_list *list)
+{
+	t_list  *l2;
+
+	l2 = malloc(sizeof(t_list));
+	bzero(l2, sizeof(t_list));
+	l2->content = malloc(list->content_size * 2);
+	l2->content_size = list->content_size * 2;
+	return (l2);
+}
+
+static void test1()
+{
+t_list  *list;
+t_list  *map;
+
+bzero((list = malloc(sizeof(t_list))), sizeof(t_list));
+bzero((list->next = malloc(sizeof(t_list))), sizeof(t_list));
+list->content_size = 21;
+list->content = strdup("abc");
+list->next->content_size = 100;
+list->next->content = strdup("abc");
+map = ft_lstmap(list, lstmap_test_fn);
+if (!!map && map->content_size == 42)
+	printf("OK.\n");
+if (!!map && map->next->content_size == 200)
+	printf("OK.\n");
+}*/
 
 void	ft_iter_test(void)
 {
@@ -1316,18 +1557,17 @@ void	ft_iter_test(void)
 	int		nb2;
 	int		nb3;
 
-	one = (t_list*)malloc(sizeof(t_list));
 	nb1 = 22;
 	nb2 = 33;
 	nb3 = 44;
 	one = ft_lstnew(&nb1, sizeof(int));
-	ft_lstadd(&one, ft_lstnew(&nb2, sizeof(int)));
-	ft_lstadd(&one, ft_lstnew(&nb3, sizeof(int)));
+	ft_mainlstadd(&one, ft_lstnew(&nb2, sizeof(int)));
+	ft_mainlstadd(&one, ft_lstnew(&nb3, sizeof(int)));
 	yellow();
 	printf("ft_lstiter: Iterate a function at all items in a list. Result was: \n");
 	printf("\033[0m");
 	ft_lstiter(one, ft_lstiter_function);
-	ft_lstdel(&one, ft_del_test);
+	ft_main_list_clearer(&one);
 }
 
 void	ft_map_test(void)
@@ -1338,8 +1578,6 @@ void	ft_map_test(void)
 	int		nb2;
 	int		nb3;
 
-	one = (t_list*)malloc(sizeof(t_list));
-	two = (t_list*)malloc(sizeof(t_list));
 	nb1 = 22;
 	nb2 = 33;
 	nb3 = 44;
@@ -1347,11 +1585,23 @@ void	ft_map_test(void)
 	ft_lstadd(&one, ft_lstnew(&nb2, sizeof(int)));
 	ft_lstadd(&one, ft_lstnew(&nb3, sizeof(int)));
 	yellow();
-	printf("ft_lstmap: Create a new list by iterating a function to all items in a list. Result was: \n");
+	printf("ft_lstmap: Create a copy of a list by iterating a function to the all items in a list. Result was: \n");
 	printf("\033[0m");
-	ft_lstiter(one, ft_lstiter_function);
 	two = ft_lstmap(one, ft_lstmap_function);
-	ft_lstiter(two, ft_lstiter_function);
+	if (*(int*)(one->content) == *(int*)(two->content))
+		printf("Head elem OK.\n");
+	else
+		printf("Head elem KO.\n");
+	if (*(int*)(one->next->content) == *(int*)(two->next->content))
+		printf("Next elem OK.\n");
+	else
+		printf("Next elem KO.\n");
+	if (*(int*)(one->next->next->content) == *(int*)(two->next->next->content))
+		printf("Last elem OK.\n");
+	else
+		printf("Last elem KO.\n");
+	ft_main_list_clearer(&one);
+	ft_main_list_clearer(&two);
 }
 
 
@@ -1366,10 +1616,10 @@ int		main(int argc, char **argv)
 		ft_strsub_tester();
 		ft_strjoin_tester(argv[1], argv[2]);
 		ft_strtrim_tester(argv[1], argv[2]);
-		ft_strsplit_tester(argv[1], argv[2]);
+		ft_strsplit_tester();
 		ft_itoa_tester();
 		ft_putcha_test2(argv[1], argv[2]);
-		ft_putnbr_test();
+		/*ft_putnbr_test();
 		ft_putnbr_fd_test();
 		ft_memset_test();
 		ft_bzero_test();
@@ -1377,8 +1627,9 @@ int		main(int argc, char **argv)
 		ft_memccpy_test();
 		ft_memmove_tester();
 		ft_memchr_tester();
-		ft_memcmp_tester(argv[1], argv[2]);
-		ft_strlen_test(argv[1], argv[2]);
+		ft_memcmp_tester(argv[1], argv[2]);*/
+		/*tested*/
+		/*ft_strlen_test(argv[1], argv[2]);
 		ft_strdup_test(argv[1], argv[2]);
 		ft_strcpy_test(argv[1], argv[2]);
 		ft_strncpy_test(argv[1], argv[2]);
@@ -1399,14 +1650,15 @@ int		main(int argc, char **argv)
 		ft_strclr_tester();
 		ft_striter_tester(argv[1], argv[2]);
 		ft_striteri_tester(argv[1], argv[2]);
-		ft_strmap_test(argv[1], argv[2]);
-		ft_strmapi_test(argv[1], argv[2]);
+		ft_strmap_test();
+		ft_strmapi_test();
 		ft_lstnew_test();
 		ft_lstdelone_test();
 		ft_lstdel_test();
 		ft_lstadd_test();
 		ft_iter_test();
-		ft_map_test();
+		ft_map_test();*/
+		/*tested*/
 	}
 	return (0);
 }

@@ -6,38 +6,38 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 17:07:38 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/19 17:55:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/25 12:24:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-t_list *ft_lstnew(void const *content, size_t content_size)
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	t_list		*new_link;
-	void		*new_content;
-	size_t		new_size;
+	t_list		*new;
 
-	new_size = content_size;
-	new_content = (void*)content;
-	if (content == NULL)
+	new = (t_list*)malloc(sizeof(*new));
+	if (new != NULL)
 	{
-		new_content = NULL;
-		new_size = 0;
-	}
-	new_link = (t_list*)malloc(sizeof(*new_link));
-	if (new_link != NULL)
-	{
-		new_link->content = (void*)malloc(sizeof(*new_content) * new_size);
-		if (new_link->content != NULL)
+		if (content != NULL)
 		{
-			new_link->content = new_content;
-			new_link->content_size = new_size;
-			new_link->next = NULL;
-			return (new_link);
+			new->content = (void*)malloc(sizeof(*content) * content_size);
+			if (new->content != NULL)
+			{
+				new->content = ft_memcpy(new->content, content, content_size);
+				new->content_size = content_size;
+			}
 		}
-		free(new_link);
+		else
+		{
+			new->content = NULL;
+			new->content_size = 0;
+		}
+		new->next = NULL;
+		return (new);
 	}
-	return (NULL);
+	free(new);
+	new = NULL;
+	return (new);
 }

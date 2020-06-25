@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 10:48:48 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/18 13:28:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/24 16:01:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n)
 	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
 	{
 		if (s1[i] > s2[i] || s1[i] < s2[i])
-			return ((char)(s1[i]) - (char)(s2[i]));
+			return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
 		i++;
 	}
 	return (0);
