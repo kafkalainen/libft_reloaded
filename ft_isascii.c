@@ -6,11 +6,9 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:06:56 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/09 14:44:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/26 12:54:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "./libft.h"
 
 int		ft_isascii(int c)
 {

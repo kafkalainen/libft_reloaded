@@ -6,11 +6,10 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 13:30:45 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/16 09:59:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/26 12:56:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
 #include <stdlib.h>
 
 void		ft_memdel(void **ap)

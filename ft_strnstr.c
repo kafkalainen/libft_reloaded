@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 11:16:09 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/11 11:04:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/26 13:00:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
-#include <string.h>
 
 char		*ft_strnstr(const char *big, const char *little, size_t len)
 {

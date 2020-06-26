@@ -6,11 +6,9 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:26:31 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/09 10:09:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/26 12:55:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "./libft.h"
 
 int		ft_isprint(int c)
 {
