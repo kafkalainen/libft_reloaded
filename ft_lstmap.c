@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 08:51:18 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/25 16:43:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/26 11:43:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,14 @@ static void		ft_lst_push_back(t_list **alst, t_list *new)
 	}
 }
 
-
-t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
 	t_list	*new;
 	t_list	*temp;
 
 	new = NULL;
 	if (lst == NULL)
-		return NULL;
+		return (NULL);
 	temp = lst;
 	while (temp != NULL)
 	{

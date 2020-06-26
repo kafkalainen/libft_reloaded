@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/26 23:33:46 by jnivala           #+#    #+#              #
-#    Updated: 2020/06/19 09:06:40 by jnivala          ###   ########.fr        #
+#    Updated: 2020/06/26 12:44:32 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,16 +45,9 @@ ft_strcpy.o ft_strncpy.o ft_strcat.o ./ft_strncat.o ./ft_strlcat.o \
 all: $(NAME)
 
 $(NAME):
-	@gcc -Wall -Werror -Wextra -c $(SRC) -I. $(INC)
+	@gcc -Wall -Werror -Wextra -c $(SRC) $(INC)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-
-test:
-	@gcc -Wall -Werror -Wextra -g test_main.c -L. -lft -lbsd -o t
-
-retest:
-	@rm -f test
-	@gcc -Wall -Werror -Wextra -g test_main.c -L. -lft -lbsd -o t
 
 clean:
 	@rm -f $(OBJ)

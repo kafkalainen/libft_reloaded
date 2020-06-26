@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 11:35:01 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/25 10:08:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/26 09:22:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ void	*ft_memalloc(size_t size)
 {
 	void *mem;
 
-	mem = (void*)malloc(sizeof(*mem) * size);
-	if (mem != NULL)
+	if (size != 0)
 	{
-		ft_bzero(mem, size);
-		return (mem);
+		mem = (void*)malloc(sizeof(*mem) * size);
+		if (mem != NULL)
+		{
+			ft_bzero(mem, size);
+			return (mem);
+		}
 	}
-	else
-		return (NULL);
+	return (NULL);
 }

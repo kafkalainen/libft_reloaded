@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 17:01:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/24 15:21:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/26 11:46:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-static void		ft_nb_assign(int len, char *str, int n)
+static void	ft_nb_assign(int len, char *str, int n)
 {
 	int		temp;
 
@@ -26,14 +26,14 @@ static void		ft_nb_assign(int len, char *str, int n)
 	}
 }
 
-static int		ft_int_len(int n)
+static int	ft_int_len(int n)
 {
 	int		i;
 
 	i = 0;
 	if (n == -2147483648)
 	{
-		n =  -214748364;
+		n = -214748364;
 		i++;
 	}
 	if (n < 0)
@@ -49,7 +49,7 @@ static int		ft_int_len(int n)
 	return (i);
 }
 
-char			*ft_itoa(int n)
+char		*ft_itoa(int n)
 {
 	int		original_len;
 	int		len;

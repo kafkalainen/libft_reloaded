@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 13:47:24 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/25 08:45:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/26 11:45:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		ft_atoi(const char *nptr)
 {
 	size_t			i;
-	long long int	integer;
+	long int		integer;
 	int				sign;
 
 	i = 0;

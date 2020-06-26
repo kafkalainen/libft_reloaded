@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 13:37:32 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/18 16:53:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/26 11:09:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 char		*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
-	char	*sub_string;
+	unsigned int	i;
+	char			*sub_string;
 
 	i = 0;
 	sub_string = (char*)malloc(sizeof(*sub_string) * (len + 1));

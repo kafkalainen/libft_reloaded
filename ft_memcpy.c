@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 09:43:06 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/17 08:26:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/26 09:56:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	const char	*s;
 
 	i = 0;
-	s = src;
-	d = dest;
+	s = (const char*)src;
+	d = (char*)dest;
 	while (i < n)
 	{
 		d[i] = s[i];
