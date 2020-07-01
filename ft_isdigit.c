@@ -6,16 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:42:12 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/08 15:47:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/01 16:27:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "./libft.h"
 
 int		ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
-		return (2048);
+		return (1);
 	else
 		return (0);
 }

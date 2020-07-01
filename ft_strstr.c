@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 09:14:07 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/18 13:08:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/30 15:39:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char		*ft_strstr(const char *haystack, const char *needle)
 
 	i = 0;
 	len = ft_strlen(needle);
+	if (len == 0)
+		return ((char*)haystack);
 	while (haystack[i] != '\0')
 	{
 		if (haystack[i] == needle[0])

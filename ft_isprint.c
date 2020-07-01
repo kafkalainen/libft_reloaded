@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:26:31 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/26 12:55:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/01 16:27:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_isprint(int c)
 {
 	if (c <= 126 && c >= 32)
-		return (16384);
+		return (1);
 	else
 		return (0);
 }

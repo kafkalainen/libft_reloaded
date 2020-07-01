@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/09 13:58:46 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/29 14:32:13 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/30 19:11:23 by jnivala           #+#    #+#             */
+/*   Updated: 2020/07/01 16:28:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
-
-void		*ft_memchr(const void *s, int c, size_t n)
+int		ft_isspace(int c)
 {
-	size_t			i;
-	const char		*temp;
-
-	i = 0;
-	temp = (char*)s;
-	while (i < n)
-	{
-		if ((unsigned char)temp[i] == (unsigned char)c)
-			return (void*)(s + i);
-		i++;
-	}
-	return (NULL);
+	if (c == ' ')
+		return (1);
+	else if (c == '\n')
+		return (1);
+	else if (c == '\t')
+		return (1);
+	else if (c == '\v')
+		return (1);
+	else if (c == '\f')
+		return (1);
+	else if (c == '\r')
+		return (1);
+	else
+		return (0);
 }

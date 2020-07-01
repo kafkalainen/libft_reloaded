@@ -6,20 +6,18 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 09:53:33 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/26 12:58:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/30 16:08:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_strcmp(const char *s1, const char *s2)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (s1[i] != '\0' || s2[i] != '\0')
+	while (*s1 || *s2)
 	{
-		if (s1[i] > s2[i] || s1[i] < s2[i])
-			return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
-		i++;
+		if (*s1 != *s2)
+			return ((unsigned char)(*s1) - (unsigned char)(*s2));
+		s1++;
+		s2++;
 	}
 	return (0);
 }

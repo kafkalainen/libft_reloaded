@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 08:09:16 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/26 11:15:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/01 15:15:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ static size_t	ft_word_counter(char const *s, char c)
 	return (word_count);
 }
 
+static size_t	ft_word_len(char const *s, char c)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len] != c && s[len] != '\0')
+		len++;
+	return (len);
+}
+
 static void		ft_divide_word(char const *s, size_t i, size_t len, char **arr)
 {
 	if (len > 0)
@@ -47,24 +57,24 @@ char			**ft_strsplit(char const *s, char c)
 	size_t			word_count;
 	char			**arr;
 
-	i = -1;
+	i = 0;
+	if (s == NULL)
+		return (NULL);
 	word_count = ft_word_counter(s, c);
 	arr = (char**)malloc(sizeof(*arr) * (word_count + 1));
 	if (arr != NULL)
 	{
-		while (++i < word_count)
+		while (i < word_count)
 		{
-			word_len = 0;
 			while (*s == c && *s != '\0')
-				++s;
+				s++;
+			word_len = ft_word_len(s, c);
 			while (*s != c && *s != '\0')
-			{
-				word_len++;
-				++s;
-			}
+				s++;
 			ft_divide_word(s, i, word_len, arr);
+			i++;
 		}
-		arr[i] = '\0';
+		arr[i] = NULL;
 	}
 	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/26 12:41:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/01 10:37:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
+int					ft_isspace(int c);
 char				*ft_itoa(int n);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_lst_addback(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+size_t				ft_lstlen(t_list **alst);
 void				*ft_memalloc(size_t size);
 void				*ft_memset(void *s, int c, size_t n);
 void				*ft_memccpy(void *dest, const void *src, int c, size_t n);
@@ -53,6 +56,8 @@ void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
+char				**ft_strarrnew(size_t arr_len, char const *str);
+void				ft_strarrdel(char **as, size_t	size);
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s);
 char				*ft_strcat(char *dest, const char *src);

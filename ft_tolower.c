@@ -6,11 +6,9 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 08:20:16 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/09 14:43:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/29 10:30:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "./libft.h"
 
 int		ft_tolower(int c)
 {

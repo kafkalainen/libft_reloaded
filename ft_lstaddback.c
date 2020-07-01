@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstaddback.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/09 13:58:46 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/29 14:32:13 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/30 09:44:05 by jnivala           #+#    #+#             */
+/*   Updated: 2020/06/30 09:44:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-void		*ft_memchr(const void *s, int c, size_t n)
+void	ft_lst_addback(t_list **alst, t_list *new)
 {
-	size_t			i;
-	const char		*temp;
+	t_list	*temp;
 
-	i = 0;
-	temp = (char*)s;
-	while (i < n)
+	if (*alst == NULL)
+		*alst = new;
+	else
 	{
-		if ((unsigned char)temp[i] == (unsigned char)c)
-			return (void*)(s + i);
-		i++;
+		temp = *alst;
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = new;
+		new->next = NULL;
 	}
-	return (NULL);
 }

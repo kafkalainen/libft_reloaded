@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 15:50:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/08 16:02:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/01 16:27:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		ft_isalnum(int c)
 {
 	if (ft_isdigit(c) || ft_isalpha(c))
-		return (8);
+		return (1);
 	else
 		return (0);
 }

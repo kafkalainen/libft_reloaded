@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 15:24:51 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/26 10:50:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/30 23:17:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,11 @@ char		*ft_strnew(size_t size)
 {
 	char *new_str;
 
-	if (size != 0)
+	new_str = (char*)malloc(sizeof(*new_str) * size + 1);
+	if (new_str != NULL)
 	{
-		new_str = (char*)malloc(sizeof(*new_str) * size + 1);
-		if (new_str != NULL)
-		{
-			ft_bzero(new_str, size + 1);
-			return (new_str);
-		}
+		ft_bzero(new_str, size + 1);
+		return (new_str);
 	}
 	return (NULL);
 }

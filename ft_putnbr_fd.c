@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 08:55:58 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/16 08:58:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/01 14:31:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void		ft_putnbr_fd(int n, int fd)
 	}
 	if (n < 0)
 	{
-		ft_putchar('-');
+		ft_putchar_fd('-', fd);
 		n *= -1;
 	}
 	if (n / 10 > 0)
-		ft_putnbr(n / 10);
+		ft_putnbr_fd(n / 10, fd);
 	ft_putchar_fd(n % 10 + '0', fd);
 }

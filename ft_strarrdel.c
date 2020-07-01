@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_strarrdel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/09 13:58:46 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/29 14:32:13 by jnivala          ###   ########.fr       */
+/*   Created: 2020/07/01 10:33:38 by jnivala           #+#    #+#             */
+/*   Updated: 2020/07/01 16:47:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
+#include <stdlib.h>
 
-void		*ft_memchr(const void *s, int c, size_t n)
+void	ft_strarrdel(char **as, size_t size)
 {
-	size_t			i;
-	const char		*temp;
+	size_t		i;
 
 	i = 0;
-	temp = (char*)s;
-	while (i < n)
+	if (as != NULL)
 	{
-		if ((unsigned char)temp[i] == (unsigned char)c)
-			return (void*)(s + i);
-		i++;
+		while (i < size)
+		{
+			ft_strdel(&as[i]);
+			i++;
+		}
+		free(as);
+		as = NULL;
 	}
-	return (NULL);
 }

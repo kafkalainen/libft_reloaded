@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 17:01:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/26 11:46:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/06/29 15:36:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	ft_nb_assign(int len, char *str, int n)
 	int		temp;
 
 	temp = 0;
+	if (n == 0)
+		str[0] = '0';
 	while (n > 0)
 	{
 		temp = n % 10;
@@ -31,6 +33,8 @@ static int	ft_int_len(int n)
 	int		i;
 
 	i = 0;
+	if (n == 0)
+		return (1);
 	if (n == -2147483648)
 	{
 		n = -214748364;
