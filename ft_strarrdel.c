@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 10:33:38 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/01 16:47:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/03 13:06:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 #include <stdlib.h>
 
-void	ft_strarrdel(char **as, size_t size)
+char	**ft_strarrdel(char **as, size_t size)
 {
 	size_t		i;
 
@@ -28,4 +28,5 @@ void	ft_strarrdel(char **as, size_t size)
 		free(as);
 		as = NULL;
 	}
+	return (NULL);
 }

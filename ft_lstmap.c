@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 08:51:18 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/30 19:10:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/03 13:56:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,27 @@ static void		ft_lst_push_back(t_list **alst, t_list *new)
 	}
 }
 
+t_list		*ft_lstdelbasicelement(t_list **alst)
+{
+	t_list *item;
+
+	while (*alst != NULL)
+	{
+		item = *alst;
+		*alst = item->next;
+		if (item->content != NULL)
+			(ft_memdel(&(item->content)));
+		free(item);
+		item = NULL;
+	}
+	return (NULL);
+}
+
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
 	t_list	*new;
 	t_list	*temp;
+	t_list	*modified_elem;
 
 	new = NULL;
 	if (lst == NULL)
@@ -40,6 +57,9 @@ t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 	temp = lst;
 	while (temp != NULL)
 	{
+		modified_elem = f(temp);
+		if (modified_elem == NULL)
+			return (ft_lstdelbasicelement(&new));
 		ft_lst_push_back(&new, f(temp));
 		temp = temp->next;
 	}

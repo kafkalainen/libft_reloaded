@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/01 10:37:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/03 13:04:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 char				**ft_strarrnew(size_t arr_len, char const *str);
-void				ft_strarrdel(char **as, size_t	size);
+char				**ft_strarrdel(char **as, size_t size);
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s);
 char				*ft_strcat(char *dest, const char *src);
