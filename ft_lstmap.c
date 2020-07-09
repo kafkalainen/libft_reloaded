@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 08:51:18 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/03 13:56:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/09 11:55:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		ft_lst_push_back(t_list **alst, t_list *new)
 	}
 }
 
-t_list		*ft_lstdelbasicelement(t_list **alst)
+static t_list	*ft_lstdelbasicelement(t_list **alst)
 {
 	t_list *item;
 
