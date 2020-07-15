@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 13:08:18 by jnivala           #+#    #+#              #
-#    Updated: 2020/07/09 10:02:29 by jnivala          ###   ########.fr        #
+#    Updated: 2020/07/15 17:43:10 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,13 @@ SRC = ./ft_strlen.c ./ft_strdup.c ./ft_strcmp.c \
 ./ft_strsub.c ./ft_strtrim.c ./ft_strjoin.c ./ft_strsplit.c ./ft_itoa.c \
 ./ft_putchar.c ./ft_putstr.c ./ft_putendl.c ./ft_putnbr.c ./ft_putnbr_fd.c \
 ./ft_lstadd.c ./ft_lstiter.c ./ft_lstmap.c ./ft_lstnew.c ./ft_lstdelone.c \
-./ft_lstdel.c ./ft_lstlen.c ./ft_lstaddback.c ./ft_isspace.c \
-./ft_strarrnew.c ./ft_strarrdel.c ./ft_strndup.c
+./ft_lstdel.c ./ft_lstlen.c ./ft_lst_addback.c ./ft_isspace.c \
+./ft_strarrnew.c ./ft_strarrdel.c ./ft_strndup.c ./ft_itoa_base.c
 
 
 INC = ./libft.h
 
-OBJ  = $(SRC:.c=*.o) ./libft.h.gch
+OBJ  = $(SRC:.c=.o) ./libft.h.gch
 
 .PHONY: clean fclean all
 

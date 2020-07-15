@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/09 10:00:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/15 15:51:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int					ft_isdigit(int c);
 int					ft_isprint(int c);
 int					ft_isspace(int c);
 char				*ft_itoa(int n);
+char				*ft_itoa_base(int value, int base);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
