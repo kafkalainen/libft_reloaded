@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 13:08:18 by jnivala           #+#    #+#              #
-#    Updated: 2020/07/16 15:45:00 by jnivala          ###   ########.fr        #
+#    Updated: 2020/07/16 15:57:08 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,7 @@ SRC = \
 
 INC = ./libft.h ./get_next_line.h
 
-OBJ  = $(SRC:.c=.o) ./libft.h.gch ./get_next_line.h.gch
+OBJ  = $(SRC:.c=.o)
 
 .PHONY: clean fclean all
 
@@ -92,8 +92,6 @@ $(NAME): $(SRC) $(INC)
 	@gcc -Wall -Werror -Wextra -c $(SRC) -I.
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@rm -f ./libft.h.gch
-	@rm -f ./get_next_line.h.gch
 	@echo Successfully created $(NAME)
 
 clean:
@@ -103,3 +101,9 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+debug:
+	@gcc -Wall -Werror -Wextra -g -c $(SRC) -I.
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	@echo Debuggable library uccessfully created $(NAME)
