@@ -6,12 +6,12 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 12:31:59 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/14 15:53:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/16 15:14:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./get_next_line.h"
-#include "./libft/includes/libft.h"
+#include "./libft.h"
 
 static int	ft_return_leftover_nl(char **line, char **left_over)
 {
@@ -106,7 +106,7 @@ int			get_next_line(const int fd, char **line)
 	static char	*left_over;
 
 	ret = 0;
-	if (fd == -1)
+	if (fd == -1 || !line)
 		return (-1);
 	if (left_over && (ret = ft_return_leftover_nl(line, &left_over) != 0))
 		return (ret);
