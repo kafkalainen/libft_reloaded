@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:21:36 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/16 20:18:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/17 08:48:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ char			*ft_itoa_base(int value, int base)
 	value_len = ft_intlen(value, base);
 	if (!(ret_arr = (char*)malloc(sizeof(*ret_arr) * (value_len + 1))))
 		return (NULL);
-	ft_handle_corner_cases(&value, &value_len, base, &ret_arr);
+	ft_handle_special(&value, &value_len, base, &ret_arr);
 	if (value_len > 0)
 		ret_arr[value_len] = '\0';
 	while (value)
 	{
-		ret_arr[value_len - 1] = arr[value % base];
+		value_len--;
+		*(ret_arr + value_len) = arr[value % base];
 		value /= base;
 		if (value * base == -2147483648)
 			value *= -1;
-		value_len--;
 	}
 	return (ret_arr);
 }
