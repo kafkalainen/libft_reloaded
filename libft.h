@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/15 15:51:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/08/06 13:57:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_list
 
 typedef const char	t_c_char;
 
+char				***ft_3dstrarrdel(char ****a3d, size_t z, size_t y);
 int					ft_atoi(const char *nptr);
 void				ft_bzero(void *s, size_t n);
 int					ft_isalpha(int c);
@@ -58,7 +59,7 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 char				**ft_strarrnew(size_t arr_len, char const *str);
-char				**ft_strarrdel(char **as, size_t size);
+char				**ft_strarrdel(char ***as, size_t size);
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s);
 char				*ft_strndup(const char *s, size_t n);

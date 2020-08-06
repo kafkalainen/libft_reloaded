@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 08:09:16 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/03 13:38:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/07/20 11:48:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char			**ft_strsplit(char const *s, char c)
 			while (*s != c && *s != '\0')
 				s++;
 			if (ft_divide_word(s, i, word_len, arr) == 0)
-				return (ft_strarrdel(arr, word_count));
+				return (ft_strarrdel(&arr, word_count));
 			i++;
 		}
 		arr[i] = NULL;
