@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 13:08:18 by jnivala           #+#    #+#              #
-#    Updated: 2020/07/17 15:50:31 by jnivala          ###   ########.fr        #
+#    Updated: 2020/10/13 11:58:46 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,8 @@ SRC = \
 ./ft_strndup.c \
 ./ft_itoa_base.c \
 ./get_next_line.c \
-./ft_str3darrdel.c
+./ft_str3darrdel.c \
+./ft_strlcpy.c
 
 INC = ./libft.h ./get_next_line.h
 

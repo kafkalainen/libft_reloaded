@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/08/06 13:57:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/10/13 11:36:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char				*ft_strndup(const char *s, size_t n);
 char				*ft_strcat(char *dest, const char *src);
 int					ft_strcmp(const char *s1, const char *s2);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
+size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *str, int c);
 char				*ft_strncat(char *dest, const char *src, size_t n);
