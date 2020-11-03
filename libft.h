@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2020/10/13 11:36:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2020/10/30 10:50:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ typedef const char	t_c_char;
 
 char				***ft_3dstrarrdel(char ****a3d, size_t z, size_t y);
 int					ft_atoi(const char *nptr);
+int					ft_atoi_base(const char *nptr, int base);
+int					ft_abs(int i);
 void				ft_bzero(void *s, size_t n);
+size_t				ft_count_wrds(const char *s, int d);
 int					ft_isalpha(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
@@ -50,6 +53,8 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				ft_memdel(void **ap);
 void				*ft_memmove(void *dest, const void *src, size_t n);
+int					ft_nb_len(int value, int base);
+double				ft_pow_of_2(double base, double exponent);
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putendl(char const *s);
@@ -58,6 +63,8 @@ void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
+size_t				ft_replace_char(char *s, int c, int rep);
+double				ft_sqrt(double base);
 char				**ft_strarrnew(size_t arr_len, char const *str);
 char				**ft_strarrdel(char ***as, size_t size);
 size_t				ft_strlen(const char *s);

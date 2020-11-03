@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strarrdel.c                                     :+:      :+:    :+:   */
+/*   ft_count_wrds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/01 10:33:38 by jnivala           #+#    #+#             */
-/*   Updated: 2020/10/30 17:05:56 by jnivala          ###   ########.fr       */
+/*   Created: 2020/10/24 11:15:06 by jnivala           #+#    #+#             */
+/*   Updated: 2020/10/24 12:31:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
-#include <stdlib.h>
+#include "libft.h"
+#include <string.h>
 
-char	**ft_strarrdel(char ***as, size_t y)
+size_t	ft_count_wrds(const char *s, int d)
 {
-	size_t		i;
+	size_t	len;
 
-	i = 0;
-	if (as != NULL)
+	len = 0;
+	if (s != 0)
 	{
-		while (i < y)
+		while (*s != '\0')
 		{
-			ft_strdel((*(as) + i));
-			i++;
+			while (*s == d || *s == '\n')
+				s++;
+			if (*s != d && *s != '\n' && *s != '\0')
+				len++;
+			while (*s != d && *s != '\n' && *s != '\0')
+				s++;
 		}
-		free(*as);
-		*as = NULL;
 	}
-	return (NULL);
+	return (len);
 }

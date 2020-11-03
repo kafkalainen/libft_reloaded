@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strarrdel.c                                     :+:      :+:    :+:   */
+/*   ft_nb_len.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/01 10:33:38 by jnivala           #+#    #+#             */
-/*   Updated: 2020/10/30 17:05:56 by jnivala          ###   ########.fr       */
+/*   Created: 2020/10/26 15:03:00 by jnivala           #+#    #+#             */
+/*   Updated: 2020/10/26 15:05:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
-#include <stdlib.h>
-
-char	**ft_strarrdel(char ***as, size_t y)
+int		ft_nb_len(int value, int base)
 {
-	size_t		i;
+	int		len;
 
-	i = 0;
-	if (as != NULL)
+	len = 0;
+	if (value < 0 && base == 10)
+		len++;
+	if (value == 0)
+		return (1);
+	while (value)
 	{
-		while (i < y)
-		{
-			ft_strdel((*(as) + i));
-			i++;
-		}
-		free(*as);
-		*as = NULL;
+		len++;
+		value /= base;
 	}
-	return (NULL);
+	return (len);
 }

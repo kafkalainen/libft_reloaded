@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strarrdel.c                                     :+:      :+:    :+:   */
+/*   ft_replace_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/01 10:33:38 by jnivala           #+#    #+#             */
-/*   Updated: 2020/10/30 17:05:56 by jnivala          ###   ########.fr       */
+/*   Created: 2020/10/26 16:57:32 by jnivala           #+#    #+#             */
+/*   Updated: 2020/10/26 17:43:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
-#include <stdlib.h>
+#include <string.h>
 
-char	**ft_strarrdel(char ***as, size_t y)
+size_t	ft_replace_char(char *s, int c, int rep)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
-	if (as != NULL)
+	while (*s != '\0')
 	{
-		while (i < y)
+		if (*s == c)
 		{
-			ft_strdel((*(as) + i));
+			*s = rep;
 			i++;
 		}
-		free(*as);
-		*as = NULL;
+		s++;
 	}
-	return (NULL);
+	return (i);
 }

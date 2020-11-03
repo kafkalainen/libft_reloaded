@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strarrdel.c                                     :+:      :+:    :+:   */
+/*   ft_pow_of_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/01 10:33:38 by jnivala           #+#    #+#             */
-/*   Updated: 2020/10/30 17:05:56 by jnivala          ###   ########.fr       */
+/*   Created: 2020/10/30 09:52:47 by jnivala           #+#    #+#             */
+/*   Updated: 2020/10/30 10:40:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
-#include <stdlib.h>
-
-char	**ft_strarrdel(char ***as, size_t y)
+double	ft_pow_of_2(double base, double exponent)
 {
-	size_t		i;
-
-	i = 0;
-	if (as != NULL)
-	{
-		while (i < y)
-		{
-			ft_strdel((*(as) + i));
-			i++;
-		}
-		free(*as);
-		*as = NULL;
-	}
-	return (NULL);
+	if (exponent == 0.0 || base == 0.0)
+		return (1);
+	return (base * base);
 }
